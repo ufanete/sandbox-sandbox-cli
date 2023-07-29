@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
 
   
   onSubmit() {
+    console.log(arguments);
     this.submitted = true;
 
     // stop here if form is invalid
@@ -47,8 +48,11 @@ export class LoginComponent implements OnInit {
         return;
     }
 
+    
+
     this.loading = true;
-    this.accountService.login(this.f['email'].value, this.f['password'].value)
+    console.dir(this.form.value);
+    this.accountService.login(this.form.value['email'], this.form.value['password'])
         .pipe(first())
         .subscribe({
             next: () => {

@@ -4,6 +4,7 @@ export interface Account {
   email: string;
   password: string;
   password_conf?: string;
+  token?: string;
 }
 
 export interface User {

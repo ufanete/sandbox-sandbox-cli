@@ -46,9 +46,6 @@
                             type="password"
                             name="password"
                             placeholder="Your Password"
-                            title="Minimum 6 characters at
-                                least 1 Alphabet and 1 Number"
-                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
                             required
                             formControlName="password" 
                             class="form-control"  />
@@ -57,6 +54,11 @@
                             title="Password Icon"
                             src="assets/password.svg">
                 </div>
+                
+                            <!--title="Minimum 6 characters at
+                                least 1 Alphabet and 1 Number"
+                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"-->
+                            
                 <!--<input type="submit" class="my-form__button" value="Login">-->
                 <button [disabled]="loading" type="submit" class="my-form__button" value="Login">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>

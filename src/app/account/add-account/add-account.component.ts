@@ -40,7 +40,7 @@ export class AddAccountComponent implements OnInit {
     const newUser: Account = this.signupForm.value;
 
     //this.onAddTask.emit(newTask);
-    this.accountService.addUser(newUser).subscribe((account: Account) => {
+    this.accountService.register(newUser).subscribe((account: Account) => {
       if (account != null) {
         this.account = account;
         this.router.navigate(['/']);
