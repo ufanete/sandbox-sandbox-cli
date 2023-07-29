@@ -14,8 +14,8 @@ export class AddUserComponent implements OnInit {
   user: User | undefined;
   //@Output() onAddTask: EventEmitter<User> = new EventEmitter();
   signupForm: FormGroup = this.formBuilder.group({
-    username: new FormControl('WPd8dBAq4HrhDvS'),//, Validators.required),
-    email: new FormControl('WPd8dBAq4HrhDvS'),
+    username: new FormControl('Barak'),//, Validators.required),
+    email: new FormControl('barak@email.com'),
     password: new FormControl('WPd8dBAq4HrhDvS'),
     password_conf: new FormControl('WPd8dBAq4HrhDvS')
   });

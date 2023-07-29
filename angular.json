@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "C:/Users/Owner/source/repos/sandbox-node/angularbuild",
+            "outputPath": "C:/Users/Owner/source/repos/sandbox-node/public",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
