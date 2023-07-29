@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "C:/Users/Owner/source/repos/sandbox-node/angularbuild",
+            "outputPath": "dist/sandbox-node-cli",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -25,12 +25,9 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/materialize-css/dist/css/materialize.min.css",
               "src/styles.css"
             ],
-            "scripts": [
-              "node_modules/materialize-css/dist/js/materialize.min.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {

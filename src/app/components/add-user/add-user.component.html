@@ -1,0 +1,43 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <div class="form-control">
+    <label for="username">Task</label>
+    <input
+      type="text"
+      name="username"
+      formControlName="username"
+      id="username"
+      placeholder="username"
+      />
+  </div>
+  <div class="form-control">
+    <label for="email">Day & Time</label>
+    <input
+      type="text"
+      name="email"
+      formControlName="email"
+      id="email"
+      placeholder="email"
+      />
+  </div>
+  <div class="form-control">
+    <label for="password">Password</label>
+    <input
+      type="text"
+      name="password"
+      formControlName="password"
+      id="password"
+      placeholder="Add Day & Time"
+      />
+  </div>
+  <div class="form-control">
+    <label for="password_conf">Confirm password</label>
+    <input
+      type="text"
+      name="password_conf"
+      formControlName="password_conf"
+      id="password_conf"
+      placeholder="Add Day & Time"
+      />
+  </div>
+  <input type="submit"[disabled]="!signupForm.valid" value="Save Task" class="btn btn-block" />
+</form>
