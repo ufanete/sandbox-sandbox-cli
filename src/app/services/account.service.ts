@@ -49,24 +49,32 @@ export class AccountService {
   }
 
   login(email: string, password: string) {
-    return this.http.post<Account>(`${environment.API_URL_ACCOUNT}/authenticate`, { email, password })
-    .pipe(
-      catchError(handleError)
-    )
-        .pipe(map(account => {
-          console.dir("sign in attempt");
-          console.dir(account);
-            // store user details and jwt token in local storage to keep Account logged in between page refreshes
-            localStorage.setItem('account', JSON.stringify(account));
-            this.accountSubject.next(account);
-            return account;
-        }));
+    return this.http.post<Account>(`${environment.API_URL_ACCOUNT}/authenticate`, 
+      { email, password })
+      .pipe(
+        catchError(handleError)
+      )
+      .pipe(map(account => {
+        console.dir("sign in attempt");
+        console.dir(account);
+          // store user details and jwt token in local storage to keep Account logged in between page refreshes
+          localStorage.setItem('account', JSON.stringify(account));
+          this.accountSubject.next(account);
+          return account;
+      }));
   }
 
   logout() {
-      // remove user from local storage and set current user to null
-      localStorage.removeItem('account');
-      this.accountSubject.next(null);
-      this.router.navigate(['/account/login']);
+    
+    return this.http.get<Account[]>(`${environment.API_URL_ACCOUNT}/signout`)
+      .pipe(
+        catchError(handleError)
+      ).pipe(map(response => {
+        // remove user from local storage and set current user to null
+        localStorage.removeItem('account');
+        this.accountSubject.next(null);
+        this.router.navigate(['/account/login']);
+      }));
+
   }
 }

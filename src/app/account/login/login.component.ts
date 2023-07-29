@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
     console.log('refreshed?:', browserRefresh);
     
     this.form = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
+      email: ['barak@email.com', Validators.required],
+      password: ['WPd8dBAq4HrhDvS', Validators.required]
     });
   }
   

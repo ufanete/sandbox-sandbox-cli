@@ -39,19 +39,16 @@ export class AddAccountComponent implements OnInit {
 
     const newUser: Account = this.signupForm.value;
 
+    console.warn('Your order has been submitted', this.signupForm.value);
+
     //this.onAddTask.emit(newTask);
     this.accountService.register(newUser).subscribe((account: Account) => {
+      console.log(account);
       if (account != null) {
         this.account = account;
+        this.signupForm.reset();
         this.router.navigate(['/']);
       }
-      console.log(account);
     });
-    
-    this.router.navigate(['/']);
-
-    console.warn('Your order has been submitted', this.signupForm.value);
-    console.dir(this.signupForm);
-    //this.signupForm.reset();
   }
 }

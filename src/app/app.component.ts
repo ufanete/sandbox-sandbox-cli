@@ -2,6 +2,9 @@ import { Component, OnDestroy } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
+import { Account } from '@app/document.schema';
+import { AccountService } from '@app/services/account.service';
+
 export let browserRefresh = false;
 
 @Component({
@@ -10,10 +13,14 @@ export let browserRefresh = false;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnDestroy {
+  account?: Account | null; 
   title = 'sandbox-node-cli';
   subscription: Subscription;
   
-  constructor(private router: Router) {
+  constructor(
+    private accountService: AccountService,
+    private router: Router) {
+    this.accountService.account.subscribe(account => this.account = account);
     this.subscription = router.events.subscribe((event) => {
         if (event instanceof NavigationStart) {
           browserRefresh = !router.navigated;
@@ -24,5 +31,9 @@ export class AppComponent implements OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
+  
+  logout() {
+    this.accountService.logout().subscribe();
+}
 
 }
