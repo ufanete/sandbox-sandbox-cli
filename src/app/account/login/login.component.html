@@ -32,9 +32,10 @@
                             id="email"
                             name="email"
                             placeholder="Your Email"
-                            required
                             formControlName="email" 
-                            class="form-control" />
+                            class="form-control"
+                            required
+                            autocomplete="username"  />
 
                     <img alt="Email Icon"
                             title="Email Icon"
@@ -46,9 +47,10 @@
                             type="password"
                             name="password"
                             placeholder="Your Password"
-                            required
                             formControlName="password" 
-                            class="form-control"  />
+                            class="form-control"
+                            required
+                            autocomplete="current-password" />
 
                     <img alt="Password Icon"
                             title="Password Icon"
@@ -58,7 +60,7 @@
                             <!--title="Minimum 6 characters at
                                 least 1 Alphabet and 1 Number"
                             pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"-->
-                            
+
                 <!--<input type="submit" class="my-form__button" value="Login">-->
                 <button [disabled]="loading" type="submit" class="my-form__button" value="Login">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>

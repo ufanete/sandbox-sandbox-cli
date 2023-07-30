@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators  } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 import { AccountService } from '@app/services/account.service';
 import { Account } from '@app/document.schema';
@@ -12,16 +13,19 @@ import { Account } from '@app/document.schema';
 })
 export class AddAccountComponent implements OnInit {
   account: Account | undefined;
-  signupForm!: FormGroup
+  form!: FormGroup;
+  loading = false;
+  submitted = false;
   
 
   constructor(private formBuilder: FormBuilder, 
     private accountService: AccountService,
+    private route: ActivatedRoute,
     private router: Router) {
   }
 
   ngOnInit(): void {
-    this.signupForm = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       username: new FormControl('Barak'),//, Validators.required),
       email: new FormControl('barak@email.com'),
       password: new FormControl('WPd8dBAq4HrhDvS'),
@@ -32,23 +36,43 @@ export class AddAccountComponent implements OnInit {
   ngOnDestroy(): void {}
 
   onSubmit(): void {
-    if (!this.signupForm.value.username) {
+    
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
+  }
+
+    this.loading = true;
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
       alert('Please add a Username!');
       return;
     }
 
-    const newUser: Account = this.signupForm.value;
+    console.warn('Your order has been submitted', this.form.value);
 
-    console.warn('Your order has been submitted', this.signupForm.value);
-
-    //this.onAddTask.emit(newTask);
-    this.accountService.register(newUser).subscribe((account: Account) => {
-      console.log(account);
-      if (account != null) {
-        this.account = account;
-        this.signupForm.reset();
-        this.router.navigate(['/']);
-      }
-    });
+    const newUser: Account = this.form.value;
+    this.accountService.register(newUser)
+      .pipe(first())
+      .subscribe({
+        next: (account: Account) => {
+          console.dir(account, "accountService subscription");
+          if (account != null) {
+            this.account = account;
+            this.form.reset();
+            
+            // redirect to home page
+            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+            console.dir(returnUrl);
+            this.router.navigateByUrl(returnUrl);
+          }
+        },
+        error: error => {
+            console.dir(error);
+            this.loading = false;
+        }
+      });
   }
 }

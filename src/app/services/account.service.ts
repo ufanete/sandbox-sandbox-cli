@@ -26,6 +26,13 @@ export class AccountService {
   public get userValue() {
     return this.accountSubject.value;
   }
+
+  private setAccountValue(account: Account): void {
+    console.dir("Set account in attempt", account);
+    // store user details and jwt token in local storage to keep Account logged in between page refreshes
+    localStorage.setItem('account', JSON.stringify(account));
+    this.accountSubject.next(account);
+  }
   
   deleteUser(user: User): Observable<User> {
     const url = `${environment.API_URL_USER}/${user._id}`;
@@ -43,24 +50,21 @@ export class AccountService {
 
   register(account: Account): Observable<User> {
     return this.http.post<Account>(`${environment.API_URL_ACCOUNT}/register`, account, httpOptions)
-      .pipe(
-        catchError(handleError)
-      );
+      .pipe(catchError(handleError))
+      .pipe(map(account => {
+          this.setAccountValue(account);
+          return account;
+          
+      }));
   }
 
   login(email: string, password: string) {
     return this.http.post<Account>(`${environment.API_URL_ACCOUNT}/authenticate`, 
       { email, password })
-      .pipe(
-        catchError(handleError)
-      )
+      .pipe(catchError(handleError))
       .pipe(map(account => {
-        console.dir("sign in attempt");
-        console.dir(account);
-          // store user details and jwt token in local storage to keep Account logged in between page refreshes
-          localStorage.setItem('account', JSON.stringify(account));
-          this.accountSubject.next(account);
-          return account;
+        this.setAccountValue(account);
+        return account;
       }));
   }
 

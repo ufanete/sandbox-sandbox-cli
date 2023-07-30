@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
       private formBuilder: FormBuilder,
+      private accountService: AccountService,
       private route: ActivatedRoute,
-      private router: Router,
-      private accountService: AccountService
+      private router: Router
   ) { }
 
   ngOnInit() {
@@ -35,10 +35,6 @@ export class LoginComponent implements OnInit {
     });
   }
   
-  // convenience getter for easy access to form fields
-  get f() { return this.form.controls; }
-
-  
   onSubmit() {
     console.log(arguments);
     this.submitted = true;
@@ -48,10 +44,7 @@ export class LoginComponent implements OnInit {
         return;
     }
 
-    
-
     this.loading = true;
-    console.dir(this.form.value);
     this.accountService.login(this.form.value['email'], this.form.value['password'])
         .pipe(first())
         .subscribe({
