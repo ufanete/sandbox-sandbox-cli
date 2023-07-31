@@ -36,7 +36,9 @@ export class TopNavigationComponent {
     /** The side panel options */
     this.panelOptions = { 
       panelClass: "bg-gradient-dark text-black bg-transparent", 
-      ariaLabelledBy: 'offcanvas-basic-title' 
+      ariaLabelledBy: 'offcanvas-basic-title',
+      backdrop: false,
+      scroll: true
     };
   }
   

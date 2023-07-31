@@ -11,6 +11,7 @@ import { UserComponent } from './components/user/user.component';
 import { PostsComponent } from './components/posts/posts.component';
 import { PostItemComponent } from './components/post-item/post-item.component';
 import { TopNavigationComponent } from './components/top-navigation/top-navigation.component';
+import { ChatRoomComponent } from './components/chat-room/chat-room.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { TopNavigationComponent } from './components/top-navigation/top-navigati
     PostsComponent,
     PostItemComponent,
     TopNavigationComponent,
+    ChatRoomComponent,
   ],
   imports: [
     BrowserModule,
