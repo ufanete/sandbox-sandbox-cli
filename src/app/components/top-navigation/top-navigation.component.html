@@ -1,0 +1,49 @@
+<nav class="navbar {{backgroundTheme}} fixed-top">
+    <div class="container-fluid">
+      
+        <button class="navbar-toggler border-0 {{backgroundTheme}}" type="button" (click)="open(content)">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" routerLink="/">{{title}}</a>
+
+        <ng-template #content let-offcanvas>
+            <div class="offcanvas-header">
+                <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+                <h4 class="offcanvas-title" id="offcanvas-basic-title">{{account?.username}}</h4>
+            </div>
+            <div class="offcanvas-body bg-gradient-dark sidebar sidebar-dark accordion">
+                <a [routerLink]="['/login']" routerLinkActive="active">login</a>
+                <a routerLink="/signup">signup</a>
+                <a href="#" (click)="logout()" >logout click</a>
+                <a routerLink="/account/logout">logout link</a>
+                <a routerLink="/">home</a>
+                
+                <button class="btn btn-outline-secondary bi bi-calendar3" (click)="logout()" type="button">Logout</button>
+
+                <form>
+                    <div class="mb-3">
+                        <label for="dateOfBirth">Go to Date</label>
+                        <div class="input-group">
+                            <input
+                                id="dateOfBirth"
+                                class="form-control"
+                                placeholder="yyyy-mm-dd"
+                                name="dp"
+                                ngbDatepicker
+                                #dp="ngbDatepicker"
+                            />
+                            <button class="btn btn-outline-secondary bi bi-calendar3" (click)="dp.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </form>
+                <div class="text-end">
+                    <button type="button" class="btn btn-outline-dark" (click)="offcanvas.close('Save click')">Save</button>
+                </div>
+            </div>
+        </ng-template>
+
+
+    </div>
+</nav>
+<hr />
+<pre>{{ closeResult }}</pre>

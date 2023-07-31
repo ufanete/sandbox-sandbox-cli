@@ -6,6 +6,14 @@ export interface Account {
   password_conf?: string;
   token?: string;
 }
+export class AccountObject implements Account {
+  _id?: string | undefined;
+  username: string = "";
+  email: string = "";
+  password: string = "";
+  password_conf?: string | undefined;
+  token?: string | undefined;
+}
 
 export interface User {
   _id?: string;
@@ -23,4 +31,10 @@ export interface Post {
   password: string;
   password_conf?: string;
 }
-  
+
+export interface JwtToken {
+  isSignedIn: boolean;
+}
+export class JwtTokenObject implements JwtToken {
+  isSignedIn: boolean = false;
+}

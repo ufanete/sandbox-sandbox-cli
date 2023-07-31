@@ -1,58 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
-form div.input-field input{
-    padding-left: 15px !important;
-    color: #25a297;
-}
-
-input.ng-invalid.ng-dirty{
-    border-bottom-color : #e91e63 !important;
-    box-shadow: 0 1px 0 0 #e91e63 !important;
-}
-
-.input-field>label{
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.btn-custom,.btn-custom:hover,.btn-custom:focus{
-    background-color: transparent;
-    font-size: 1.1rem;
-    margin : 0px 5px;
-    border: #fff solid 1px ;
-    text-transform:none;
-}
-
-div.card{
-    background-color : #083045;
-    border-radius: 10px;
-}
-
-.vl {
-    border-left: 2px solid #9e9e9e;
-    height: 400px;
-}
-
-a.action-btn{
-    color: #9e9e9e ;
-    margin: 0px 5px;
-
-}
-a.action-btn:hover{
-    cursor: pointer;
-}
-
-#toast-container {
-    top: auto !important;
-    right: auto !important;
-    bottom: 10%;
-    left:7%;
-}
-
-/**
-UI Imput
-*/
-@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
-
 :root {
     --primary: #4978F0;
     --primary-light: #E1EEF5;
@@ -61,15 +6,14 @@ UI Imput
     --text: #1F2346;
 }
 
-body {
-    font-size: 16px;
+body::-webkit-scrollbar {
+    display: none;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Mulish;
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .socials-row {
@@ -120,8 +64,6 @@ body {
 }
 
 .login-wrapper {
-    position: relative;
-    display: grid;
     grid-template-columns: 4fr 3fr;
     max-width: 1200px;
     margin: 0 auto;
@@ -129,20 +71,18 @@ body {
 
 
 .login-side {
-    padding: 188px 32px 48px 32px;
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: center;
 }
 
 .info-side {
     height: 100vh;
-    padding: 84px 48px 48px 32px;
     color: #401B3D;
     display: flex;
     overflow: hidden;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     background-color: var(--background);
 }
@@ -190,7 +130,7 @@ body {
 .my-form {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     position: relative;
     gap: 16px;
 }

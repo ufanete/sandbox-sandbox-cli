@@ -1,0 +1,16 @@
+
+@media (min-width: 576px) {
+    .topbar .dropdown .dropdown-menu {
+    width: auto;
+    right: 0;
+    }
+}
+.img-profile {
+    height: 2rem;
+    width: 2rem;
+}
+.nav {
+    /*opacity: 0.3;*/
+    
+    background: rgba(76, 175, 80, 0.3)
+}

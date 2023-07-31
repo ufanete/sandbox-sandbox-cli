@@ -1,0 +1,88 @@
+/* setup */
+html,
+body,
+.holster {
+  height: 100vh;
+}
+.holster {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: column nowrap;
+  font-family: monospace;
+}
+/* 
+.container-post::-webkit-scrollbar {
+    display: none;
+}
+
+Hide scrollbar for IE, Edge and Firefox 
+.container-post {
+    -ms-overflow-style: none;  /IE and Edge
+    scrollbar-width: none;  /Firefox 
+}
+*/
+
+.container-post::-webkit-scrollbar {
+  width: 1em;
+}
+
+.container-post::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgb(140 80 239,0.3);/* rgba(0,0,0,0.3);*/
+}
+
+.container-post::-webkit-scrollbar-thumb {
+background-color: darkgrey;
+outline: 1px solid slategrey;
+}
+
+.container-post {
+  scrollbar-width: none;  /*Firefox */
+}
+
+.container-post {
+  display: flex;
+  overflow: auto;
+  outline: 1px dashed lightgray;
+  flex: none;
+}
+
+.container-post.y {
+  width: 100%;
+  height: calc(100vh - 20px);
+  flex-flow: column nowrap;
+}
+
+.y.mandatory-scroll-snapping {
+  scroll-snap-type: y mandatory;
+}
+
+.y.proximity-scroll-snapping {
+  scroll-snap-type: y proximity;
+}
+
+.container-post > app-post-item  {
+  text-align: center;
+  scroll-snap-align: center;
+  flex: none;
+}
+
+.y.container-post > app-post-item {
+  width: 100%;
+  height: calc(100vh - 20px);
+  color: #fff;
+  background: linear-gradient(454deg, #4f4080, #9553ff);
+
+  width: 100%;
+  height: calc(100vh - 20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    color: #fff;
+    background: linear-gradient(454deg, #4f4080, #9553ff);
+    scroll-snap-type: center;
+}
+body {
+    overflow: hidden!important;
+}

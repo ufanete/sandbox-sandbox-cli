@@ -20,8 +20,8 @@ export class AppComponent implements OnDestroy {
   constructor(
     private accountService: AccountService,
     private router: Router) {
-    this.accountService.account.subscribe(account => this.account = account);
-    this.subscription = router.events.subscribe((event) => {
+      this.accountService.account.subscribe(account => this.account = account);
+      this.subscription = router.events.subscribe((event) => {
         if (event instanceof NavigationStart) {
           browserRefresh = !router.navigated;
         }
@@ -31,9 +31,5 @@ export class AppComponent implements OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  
-  logout() {
-    this.accountService.logout().subscribe();
-}
 
 }

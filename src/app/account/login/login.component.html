@@ -33,7 +33,7 @@
                             name="email"
                             placeholder="Your Email"
                             formControlName="email" 
-                            class="form-control"
+                            class=""
                             required
                             autocomplete="username"  />
 
@@ -48,7 +48,7 @@
                             name="password"
                             placeholder="Your Password"
                             formControlName="password" 
-                            class="form-control"
+                            class=""
                             required
                             autocomplete="current-password" />
 
@@ -75,8 +75,13 @@
                         </a>
                     </div>
                     <div class="my-form__signup">
-                        <a routerLink="/account/register" title="Create Account">
+                        <a class="btn btn-link" routerLink="/account/register" title="Create Account">
                             Create Account
+                        </a>
+                    </div>
+                    <div class="my-form__signup">
+                        <a routerLink="/account/register" title="Create Account">
+                            Continue without account
                         </a>
                     </div>
                 </div>
