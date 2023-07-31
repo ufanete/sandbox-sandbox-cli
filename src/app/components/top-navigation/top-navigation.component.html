@@ -1,4 +1,4 @@
-<nav class="navbar {{backgroundTheme}} fixed-top">
+<nav class="navbar {{backgroundTheme}} sticky-top">
     <div class="container-fluid">
       
         <button class="navbar-toggler border-0 {{backgroundTheme}}" type="button" (click)="open(content)">
@@ -11,7 +11,7 @@
                 <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
                 <h4 class="offcanvas-title" id="offcanvas-basic-title">{{account?.username}}</h4>
             </div>
-            <div class="offcanvas-body bg-gradient-dark sidebar sidebar-dark accordion">
+            <div class="offcanvas-body sidebar sidebar-dark accordion">
                 <a [routerLink]="['/login']" routerLinkActive="active">login</a>
                 <a routerLink="/signup">signup</a>
                 <a href="#" (click)="logout()" >logout click</a>

@@ -24,12 +24,11 @@ export interface User {
   token?: string;
 }
 
-export interface Post {
+export class Post {
   _id?: string;
-  username: string;
-  email: string;
-  password: string;
-  password_conf?: string;
+  src: string="";
+  date: string="";
+  style: any={"background":""};
 }
 
 export interface JwtToken {

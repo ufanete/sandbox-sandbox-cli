@@ -1,10 +1,8 @@
-
 <app-top-navigation 
 *ngIf="account"
 [title]="title"></app-top-navigation>
- 
 <!-- Body -->
-<div>
+<div class="app-container">
   <!-- Renders page from the router url -->
   <router-outlet></router-outlet>
 </div>

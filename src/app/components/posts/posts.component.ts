@@ -13,7 +13,10 @@ export class PostsComponent implements OnInit {
   constructor(private dataService: DataService) {}
   
   ngOnInit(): void {
-    this.dataService.getPosts().subscribe((posts) => (this.posts = posts));
+    this.dataService.getPosts().subscribe((posts) => {
+      this.posts = posts;
+      console.log(posts);
+    });
   }
 
   addPost(post: Post) {

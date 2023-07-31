@@ -12,7 +12,8 @@ import { AccountService } from '@app/services/account.service';
   styleUrls: ['./top-navigation.component.css']
 })
 export class TopNavigationComponent {
-  backgroundTheme = "bg-body-tertiary"
+  panelOptions:Object;
+  backgroundTheme:string = "bg-body-tertiary";
   faBars = faBars;
   closeResult = '';
   isLoggedIn: boolean = false;
@@ -31,6 +32,12 @@ export class TopNavigationComponent {
     this.accountService.isUserLoggedIn.subscribe((isLoggedIn) => {
       this.isLoggedIn = true;
     });
+
+    /** The side panel options */
+    this.panelOptions = { 
+      panelClass: "bg-gradient-dark text-black bg-transparent", 
+      ariaLabelledBy: 'offcanvas-basic-title' 
+    };
   }
   
   /** The logout function */
@@ -43,7 +50,7 @@ export class TopNavigationComponent {
 
   /** OpenS the side navigation panel */
 	open(content: any) {
-		this.offcanvasService.open(content, { ariaLabelledBy: 'offcanvas-basic-title' }).result.then(
+		this.offcanvasService.open(content, this.panelOptions).result.then(
 			(result) => {
 				this.closeResult = `Closed with: ${result}`;
 			},

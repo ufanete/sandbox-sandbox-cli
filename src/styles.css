@@ -1,3 +1,28 @@
+/* setup 
+
+    background-image: linear-gradient( 1deg,#0098ff 10%,#0e0e0ead 100%);
+    
+    background-image: linear-gradient( 180deg,#1f1f1f 10%,#373840 100%);
+    background-color: #ffffff;
+    opacity: .9;
+    border-radius: 20px;
+    */
+html,
+body,
+.holster {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: column nowrap;
+  font-family: monospace;
+}
+.app-container {
+    min-height: 320px;
+    overflow: hidden;
+}
+
 :root {
     --primary: #4978F0;
     --primary-light: #E1EEF5;
@@ -6,15 +31,32 @@
     --text: #1F2346;
 }
 
+.bg-gradient-dark {    
+    
+    --border-bottom-width: 0.5px;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-left-width: 0.5px;
+    --border-right-width: 0.5px;
+    --border-style: solid;
+    --border-top-width: 0.5px;
+    backdrop-filter: blur(20px);
+    background: linear-gradient(rgba(209, 209, 209, 0.55) 0%, rgba(102, 102, 102, 0.45) 100%);
+    box-shadow: rgba(0, 0, 0, 0.11) 0px 0.636953px 0.636953px -0.9375px, rgba(0, 0, 0, 0.1) 0px 1.9316px 1.9316px -1.875px, rgba(0, 0, 0, 0.09) 0px 5.10612px 5.10612px -2.8125px, rgba(0, 0, 0, 0.04) 0px 16px 16px -3.75px;
+    opacity: 1;
+}
+
+
+/* Hide scrollbar for IE, Edge and Firefox */
+
 body::-webkit-scrollbar {
     display: none;
 }
-
-/* Hide scrollbar for IE, Edge and Firefox */
 body {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
 }
+
+/* IE and Edge *//* Firefox */
 
 .socials-row {
     display: flex;
