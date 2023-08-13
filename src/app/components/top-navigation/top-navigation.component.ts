@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 import {  NgbOffcanvas, OffcanvasDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import { Account, JwtToken } from '@app/document.schema';
 import { AccountService } from '@app/services/account.service';
-import {environment} from '@environments/environment'
+import {environment} from '@environments/environment';
 
 @Component({
   selector: 'app-top-navigation',
@@ -13,44 +14,50 @@ import {environment} from '@environments/environment'
   styleUrls: ['./top-navigation.component.css']
 })
 export class TopNavigationComponent {
-  panelOptions:Object;
   backgroundTheme:string = "bg-body-tertiary";
   faBars = faBars;
   closeResult = '';
-  isSignedIn: boolean = false;
+  isUserLoggedIn: BehaviorSubject<boolean>;
   title: string = environment.title;
-
-  @Input()
-  account?: Account | null;
+  account: Account | undefined;
+  /** The side panel options */
+  panelOptions:Object = {
+    panelClass: "bg-gradient-dark text-black bg-transparent", 
+    ariaLabelledBy: 'offcanvas-basic-title',
+    backdrop: false,
+    scroll: true
+  };
   
   constructor(
     private accountService: AccountService,
     private router: Router,
-    private offcanvasService: NgbOffcanvas) {
-    this.accountService.account.subscribe(account => this.account = account);
-    this.accountService.isUserLoggedIn.subscribe((token: JwtToken) => {
-      console.debug('isLoggedIn', token);
-      this.isSignedIn = token.isSignedIn;
+    private offcanvasService: NgbOffcanvas
+  ) {
+    this.isUserLoggedIn = new BehaviorSubject(false);
+    this.accountService.account.subscribe((account: Account) => {
+      this.account = account;
     });
 
-    /** The side panel options */
-    this.panelOptions = {
-      panelClass: "bg-gradient-dark text-black bg-transparent", 
-      ariaLabelledBy: 'offcanvas-basic-title',
-      backdrop: false,
-      scroll: true
-    };
+    this.accountService.isUserLoggedIn.subscribe((token: JwtToken) => {
+      console.debug('isLoggedIn', token);
+      this.isUserLoggedIn.next(token.isSignedIn);
+    });
+  }
+
+  public get isSignedIn() : boolean {
+    return this.isUserLoggedIn.value;
   }
   
   /** The logout function */
   logout(): void {
-    this.accountService.logout()
+    this.accountService.signout()
       .subscribe(() => {
         this.offcanvasService.dismiss();
+        this.router.navigate([environment.PAGE_HOME]);
       });
   }
 
-  /** OpenS the side navigation panel */
+  /** Opens the side navigation panel */
 	open(content: any) {
 		this.offcanvasService.open(content, this.panelOptions).result.then(
 			(result) => {

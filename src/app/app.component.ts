@@ -1,6 +1,6 @@
 import { Component, OnDestroy, HostListener  } from '@angular/core';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 
 import { Account } from '@app/document.schema';
@@ -15,12 +15,15 @@ export let browserRefresh = false;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnDestroy {
-  account?: Account | null; 
+  account: Observable<Account>; 
   title = environment.title;
   
   constructor(
-    private accountService: AccountService) {
-      this.accountService.account.subscribe(account => this.account = account);
+    private accountService: AccountService
+    ) {
+      
+      this.account = this.accountService.account.asObservable();
+      //this.accountService.account.subscribe(account => this.account = account);
   }
 
   

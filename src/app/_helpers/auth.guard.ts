@@ -12,12 +12,12 @@ export const isSignedIn = (
     const authService = inject(AccountService);
     const router = inject(Router);
   
-    return authService.isLoggedIn().pipe(
+    return authService.isSignedIn().pipe(
       map((jwt) => {
         return jwt.isSignedIn;
       }),
       catchError(() => {
-        router.navigate([environment.URL_LOGIN]);
+        router.navigate([environment.PAGE_LOGIN]);
         return of(false);
       })
     );
@@ -31,7 +31,7 @@ export const isSignedOut = (
   const authService = inject(AccountService);
   const router = inject(Router);
 
-  return authService.isLoggedIn().pipe(
+  return authService.isSignedIn().pipe(
     map((jwt) => {
       return !jwt.isSignedIn;
     }),

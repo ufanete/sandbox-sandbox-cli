@@ -28,7 +28,12 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/vendor/jquery/jquery.min.js",
+              "src/assets/vendor/jquery/ui/jquery-ui.min.js",
+              "src/assets/vendor/socket.io/socket.io.js",
+              "src/assets/javascripts/chat.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -36,7 +41,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",

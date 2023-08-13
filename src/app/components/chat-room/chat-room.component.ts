@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+// declare the javascript function here
+declare function chatapp(): any;
 
 @Component({
   selector: 'app-chat-room',
   templateUrl: './chat-room.component.html',
   styleUrls: ['./chat-room.component.css']
 })
-export class ChatRoomComponent {
+export class ChatRoomComponent implements OnInit {
 
+  constructor() {
+  }
+  ngOnInit(): void {
+    chatapp();
+  }
 }

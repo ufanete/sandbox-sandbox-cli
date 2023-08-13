@@ -13,17 +13,14 @@ import { environment } from '@environments/environment';
 })
 export class AccountService {
   public ACCOUNT_TAG: string = "account";
-  private accountSubject: BehaviorSubject<Account>;
-  public account: Observable<Account | null>;
+  public account: BehaviorSubject<Account>;
   public isUserLoggedIn: BehaviorSubject<JwtToken>;
   
   constructor(
-    private router: Router,
     private http: HttpClient
   ) { 
       let fromCache = localStorage.getItem(this.ACCOUNT_TAG);
-      this.accountSubject = new BehaviorSubject(JSON.parse(fromCache!));
-      this.account = this.accountSubject.asObservable();
+      this.account = new BehaviorSubject(JSON.parse(fromCache!));
       this.isUserLoggedIn = new BehaviorSubject(new JwtTokenObject());
 
       if (fromCache == null) {
@@ -34,7 +31,7 @@ export class AccountService {
 
   /** Get user in session */
   public get userValue(): Account {
-    return this.accountSubject.value;
+    return this.account.value;
   }
 
   /** store user details and jwt token in local storage 
@@ -42,13 +39,13 @@ export class AccountService {
   private setAccountValue(account: Account): void {
     console.debug("Set account", account);
     localStorage.setItem(this.ACCOUNT_TAG, JSON.stringify(account));
-    this.accountSubject.next(account);
+    this.account.next(account);
   }
 
   /** Remove user from local storage and set current user to null */
   private removeAccountValue(): void {
     localStorage.removeItem(this.ACCOUNT_TAG);
-    this.accountSubject.next(new AccountObject());
+    this.account.next(new AccountObject());
   }
   
   deleteUser(user: Account): Observable<Account> {
@@ -65,16 +62,28 @@ export class AccountService {
     );
   }
 
+  /**
+   * {POST}
+   * Create new User Account
+   * @param account 
+   * @returns 
+   */
   register(account: Account): Observable<Account> {
     return this.http.post<Account>(`${environment.API_URL_ACCOUNT}/register`, account, getHeader(this.userValue))
       .pipe(catchError(handleError))
       .pipe(map(account => {
           this.setAccountValue(account);
           return account;
-          
       }));
   }
 
+  /**
+   * {POST}
+   * Login to existing User Account
+   * @param email 
+   * @param password 
+   * @returns 
+   */
   login(email: string, password: string): Observable<Object> {
     return this.http.post<Account>(`${environment.API_URL_ACCOUNT}/authenticate`, 
       { email, password })
@@ -87,31 +96,35 @@ export class AccountService {
 
   /**
    * 
-   * @returns 
+   * @returns JwtToken for the broswer session, 
+   * isSignedIn is True if logged into an existing User Account
    */
-  isLoggedIn():  Observable<JwtToken>  {
+  isSignedIn():  Observable<JwtToken>  {
     return this.http.post<JwtToken>(`${environment.API_URL_ACCOUNT}/isSignedIn`, null, getHeader(this.userValue))
-      .pipe(catchError(handleError))
-      .pipe(map(token => {
-        this.isUserLoggedIn.next(token);
-        return token;
-      }));
+      .pipe(
+        catchError(handleError)
+      ).pipe(
+        map(token => {
+          this.isUserLoggedIn.next(token);
+          return token;
+        })
+      );
   }
 
   /**
-   * Logout from user account.
+   * SignOut from {@link User: User} Account.
    * 
    * @returns 
    */
-  logout(): Observable<Object> {
+  signout(): Observable<Object> {
     return this.http.get<Object>(`${environment.API_URL_ACCOUNT}/signout`)
       .pipe(
         catchError(handleError)
-      ).pipe(map(response => {
-        console.debug("logout - response -> ", response);
-        this.removeAccountValue();
-        this.router.navigate([environment.URL_LOGIN]);
-        return response;
-      }));
+      ).pipe(
+        map(response => {
+          this.removeAccountValue();
+          return response;
+        })
+      );
   }
 }

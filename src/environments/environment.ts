@@ -9,7 +9,8 @@ export const environment = {
     API_URL_ACCOUNT: '/api/account',
     API_URL_USER: '/api/users',
     API_URL_POST: '/api/posts',
-    URL_LOGIN: '/account/login'
+    PAGE_LOGIN: '/account/login',
+    PAGE_HOME: '/'
 };
 
 /*

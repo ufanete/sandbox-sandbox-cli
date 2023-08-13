@@ -2,25 +2,33 @@
 
 <div class="holster">
 
-
-  <ul id="messages"></ul>
-  <form id="form" action="">
-    <input id="input" autocomplete="off" /><button>Send</button>
-  </form>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-8 col-lg-7">
+        <ul class="pages">
+          <li class="chat page d-none">
+            <div class="chatArea"><ul class="messages"></ul></div>
+            <input class="inputMessage" placeholder="Type here..." />
+          </li>
+          <li class="login page">
+            <div class="form">
+              <h3 class="title">What's your nickname?</h3>
+              <input class="usernameInput" type="text" maxlength="14"/>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
   
   </div>
-<script src="https://cdn.socket.io/4.5.4/socket.io.min.js" defer></script>
-<script>
-  var socket = io(window.location.origin, { path : "/chat/"});
 
-  var form = document.getElementById('form');
-  var input = document.getElementById('input');
+  <script>
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    if (input.value) {
-      socket.emit('chat message', input.value);
-      input.value = '';
-    }
-  });
-</script>
+    $(document).ready(function() {
+      chatapp();
+    });
+
+
+    </script>
