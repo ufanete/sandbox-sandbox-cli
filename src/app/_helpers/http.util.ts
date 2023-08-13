@@ -21,7 +21,7 @@ export function getHeader(account: Account | null) {
     return {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',
-            'Authorization': account?.token || ""
+            'Authorization': `Bearer ${account?.token || ""}`
         })
     }
 

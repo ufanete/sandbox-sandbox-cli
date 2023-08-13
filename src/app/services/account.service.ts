@@ -93,7 +93,6 @@ export class AccountService {
     return this.http.post<JwtToken>(`${environment.API_URL_ACCOUNT}/isSignedIn`, null, getHeader(this.userValue))
       .pipe(catchError(handleError))
       .pipe(map(token => {
-        console.log(token);
         this.isUserLoggedIn.next(token);
         return token;
       }));
@@ -111,7 +110,7 @@ export class AccountService {
       ).pipe(map(response => {
         console.debug("logout - response -> ", response);
         this.removeAccountValue();
-        this.router.navigate(['/account/login']);
+        this.router.navigate([environment.URL_LOGIN]);
         return response;
       }));
   }

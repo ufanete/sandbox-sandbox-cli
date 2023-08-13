@@ -16,7 +16,6 @@ export class AddAccountComponent implements OnInit {
   form!: FormGroup;
   loading = false;
   submitted = false;
-  
 
   constructor(private formBuilder: FormBuilder, 
     private accountService: AccountService,
@@ -45,19 +44,15 @@ export class AddAccountComponent implements OnInit {
     this.loading = true;
     this.submitted = true;
 
-    console.warn('Your order has been submitted', this.form.value);
-
     const newUser: Account = this.form.value;
     this.accountService.register(newUser)
       .pipe(first())
       .subscribe({
         next: (account: Account) => {
-          console.dir(account, "accountService subscription");
           if (account != null) {
             this.account = account;
             // redirect to home page
             const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-            console.dir(returnUrl);
             this.router.navigateByUrl(returnUrl);
           }
         },

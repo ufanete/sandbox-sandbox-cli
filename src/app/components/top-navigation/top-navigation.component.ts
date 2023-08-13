@@ -71,9 +71,4 @@ export class TopNavigationComponent {
 			return `with: ${reason}`;
 		}
 	}
-  /*
-  isLoggedIn() {
-    return true;//this.account?._id != null;
-  }
-*/
 }
