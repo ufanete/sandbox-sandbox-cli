@@ -1,11 +1,14 @@
-<div class="my-form__wrapper">
+
+  <div class="login-wrapper">
+    <div class="my-form__wrapper">
+ 
   <div class="login-welcome-row">
       <h1>Welcome back &#x1F44F;</h1>
       <p>Please enter your details!</p>
   </div>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="my-form">
     <div class="text-field">
-      <label for="username">Task</label>
+      <label for="username">Username</label>
       <input
         type="text"
         name="username"
@@ -17,7 +20,7 @@
         />
     </div>
     <div class="text-field">
-      <label for="email">Day & Time</label>
+      <label for="email">Email</label>
       <input
         type="text"
         name="email"
@@ -60,4 +63,5 @@
   </button>
 
   </form>
+</div> 
 </div>

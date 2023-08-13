@@ -1,5 +1,26 @@
+<app-top-navigation></app-top-navigation>
+
+<div class="holster">
+
+
   <ul id="messages"></ul>
   <form id="form" action="">
     <input id="input" autocomplete="off" /><button>Send</button>
   </form>
-  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js" defer></script>
+  
+  </div>
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js" defer></script>
+<script>
+  var socket = io(window.location.origin, { path : "/chat/"});
+
+  var form = document.getElementById('form');
+  var input = document.getElementById('input');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (input.value) {
+      socket.emit('chat message', input.value);
+      input.value = '';
+    }
+  });
+</script>

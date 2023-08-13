@@ -4,7 +4,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { BehaviorSubject, Observable, catchError, firstValueFrom  } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { handleError, httpOptions } from '../_helpers/http.util';
+import { handleError, getHeader } from '../_helpers/http.util';
 import { Account, AccountObject, JwtTokenObject, JwtToken } from '../document.schema';
 import { environment } from '@environments/environment';
 
@@ -13,9 +13,9 @@ import { environment } from '@environments/environment';
 })
 export class AccountService {
   public ACCOUNT_TAG: string = "account";
-  private accountSubject: BehaviorSubject<Account | null>;
+  private accountSubject: BehaviorSubject<Account>;
   public account: Observable<Account | null>;
-  public isUserLoggedIn: BehaviorSubject<JwtTokenObject>;
+  public isUserLoggedIn: BehaviorSubject<JwtToken>;
   
   constructor(
     private router: Router,
@@ -25,20 +25,15 @@ export class AccountService {
       this.accountSubject = new BehaviorSubject(JSON.parse(fromCache!));
       this.account = this.accountSubject.asObservable();
       this.isUserLoggedIn = new BehaviorSubject(new JwtTokenObject());
-      this.isLoggedIn2().then((val) => {
-        console.debug("isLoggedIn2", val);
-      });
+
       if (fromCache == null) {
         // set dummy account
-        let dummyAccount = new AccountObject();
-        this.setAccountValue(dummyAccount);
+        this.setAccountValue(new AccountObject());
       }
-      
-      console.debug('Init AccountService', this.accountSubject.value, ' Account -> ', this.account);
   }
 
   /** Get user in session */
-  public get userValue() {
+  public get userValue(): Account {
     return this.accountSubject.value;
   }
 
@@ -53,7 +48,7 @@ export class AccountService {
   /** Remove user from local storage and set current user to null */
   private removeAccountValue(): void {
     localStorage.removeItem(this.ACCOUNT_TAG);
-    this.accountSubject.next(null);
+    this.accountSubject.next(new AccountObject());
   }
   
   deleteUser(user: Account): Observable<Account> {
@@ -65,13 +60,13 @@ export class AccountService {
 
   updateUser(user: Account): Observable<Account> {
     const url = `${environment.API_URL_USER}/${user._id}`;
-    return this.http.put<Account>(url, user, httpOptions).pipe(
+    return this.http.put<Account>(url, user, getHeader(this.userValue)).pipe(
       catchError(handleError)
     );
   }
 
   register(account: Account): Observable<Account> {
-    return this.http.post<Account>(`${environment.API_URL_ACCOUNT}/register`, account, httpOptions)
+    return this.http.post<Account>(`${environment.API_URL_ACCOUNT}/register`, account, getHeader(this.userValue))
       .pipe(catchError(handleError))
       .pipe(map(account => {
           this.setAccountValue(account);
@@ -85,35 +80,30 @@ export class AccountService {
       { email, password })
       .pipe(catchError(handleError))
       .pipe(map(account => {
-        console.debug("logged in");
         this.setAccountValue(account);
         return account;
       }));
   }
 
-  isLoggedIn():  Observable<Object |  null>  {
-    let accountObject = this.accountSubject.value;
-    console.debug("1 - response/account", this.accountSubject.value);
-    let isLoggedIn: boolean = false;
-    const params = { jwt_token: accountObject?.token };
-    return this.http.post<Object>(`${environment.API_URL_ACCOUNT}/isSignedIn`, params);
+  /**
+   * 
+   * @returns 
+   */
+  isLoggedIn():  Observable<JwtToken>  {
+    return this.http.post<JwtToken>(`${environment.API_URL_ACCOUNT}/isSignedIn`, null, getHeader(this.userValue))
+      .pipe(catchError(handleError))
+      .pipe(map(token => {
+        console.log(token);
+        this.isUserLoggedIn.next(token);
+        return token;
+      }));
   }
 
-  async isLoggedIn2():  Promise<boolean |  null>  {
-    let accountObject = this.accountSubject.value;
-    console.debug("1 - response/account", this.accountSubject.value);
-    let isLoggedIn: boolean = false;
-    if (accountObject != null) {
-      const params = { jwt_token: accountObject.token };
-      const query = this.http.post<JwtToken>(`${environment.API_URL_ACCOUNT}/isSignedIn`, params);
-      const firstNumber = await firstValueFrom(query);
-      isLoggedIn = firstNumber.isSignedIn;
-      console.debug("1 - firstNumber -> ", firstNumber, " isLoggedIn -> ", isLoggedIn);
-    }
-    return isLoggedIn;
-  }
-
-  /** Logout from account */
+  /**
+   * Logout from user account.
+   * 
+   * @returns 
+   */
   logout(): Observable<Object> {
     return this.http.get<Object>(`${environment.API_URL_ACCOUNT}/signout`)
       .pipe(

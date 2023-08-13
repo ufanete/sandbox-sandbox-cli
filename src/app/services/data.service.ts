@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 
-import { handleError, httpOptions } from '@app/_helpers/http.util';
+import { handleError, getHeader } from '@app/_helpers/http.util';
 import { User, Post } from '@app/document.schema'
 import { environment } from '@environments/environment';
 
@@ -25,7 +25,7 @@ export class DataService {
   }
 
   addPost(post: Post): Observable<Post> {
-    return this.http.post<Post>(environment.API_URL_POST, post, httpOptions).pipe(
+    return this.http.post<Post>(environment.API_URL_POST, post, getHeader(null)).pipe(
       catchError(handleError)
     );
   }

@@ -9,17 +9,26 @@
         <ng-template #content let-offcanvas>
             <div class="offcanvas-header">
                 <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
-                <h4 class="offcanvas-title" id="offcanvas-basic-title">{{account?.username}}</h4>
+                <h4 class="offcanvas-title" id="offcanvas-basic-title">{{account?.username}} Logged In: {{ isSignedIn }}</h4>
             </div>
             <div class="offcanvas-body sidebar sidebar-dark accordion">
-                <a [routerLink]="['/login']" routerLinkActive="active">login</a>
-                <a routerLink="/signup">signup</a>
-                <a href="#" (click)="logout()" >logout click</a>
-                <br/>
-                <a [routerLink]="['/chat']" routerLinkActive="active">chat</a>
                 
-                <button class="btn bg-gradient-dark" (click)="logout()" type="button">Logout</button>
-
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a [routerLink]="['/login']" routerLinkActive="active">login</a>
+                    </li>
+                    <li class="list-group-item"><a [routerLink]="['/account/login']" routerLinkActive="active">account login</a></li>
+                    <li class="list-group-item">
+                        <a [routerLink]="['/chat']" routerLinkActive="active">chat</a>
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn bg-gradient-dark" (click)="logout()" type="button">Logout</button>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" (click)="logout()" >logout click</a>
+                    </li>
+                    <li class="list-group-item"><a [routerLink]="['/account/register']" routerLinkActive="active">signup</a></li>
+                  </ul>
                 <form>
                     <div class="mb-3">
                         <label for="dateOfBirth">Go to Date</label>

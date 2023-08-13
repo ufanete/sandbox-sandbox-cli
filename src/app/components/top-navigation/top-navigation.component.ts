@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import {  NgbOffcanvas, OffcanvasDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-import { Account } from '@app/document.schema';
+import { Account, JwtToken } from '@app/document.schema';
 import { AccountService } from '@app/services/account.service';
+import {environment} from '@environments/environment'
 
 @Component({
   selector: 'app-top-navigation',
@@ -16,10 +17,8 @@ export class TopNavigationComponent {
   backgroundTheme:string = "bg-body-tertiary";
   faBars = faBars;
   closeResult = '';
-  isLoggedIn: boolean = false;
-
-  @Input()
-  title!: string;
+  isSignedIn: boolean = false;
+  title: string = environment.title;
 
   @Input()
   account?: Account | null;
@@ -29,12 +28,13 @@ export class TopNavigationComponent {
     private router: Router,
     private offcanvasService: NgbOffcanvas) {
     this.accountService.account.subscribe(account => this.account = account);
-    this.accountService.isUserLoggedIn.subscribe((isLoggedIn) => {
-      this.isLoggedIn = true;
+    this.accountService.isUserLoggedIn.subscribe((token: JwtToken) => {
+      console.debug('isLoggedIn', token);
+      this.isSignedIn = token.isSignedIn;
     });
 
     /** The side panel options */
-    this.panelOptions = { 
+    this.panelOptions = {
       panelClass: "bg-gradient-dark text-black bg-transparent", 
       ariaLabelledBy: 'offcanvas-basic-title',
       backdrop: false,
@@ -71,5 +71,9 @@ export class TopNavigationComponent {
 			return `with: ${reason}`;
 		}
 	}
-
+  /*
+  isLoggedIn() {
+    return true;//this.account?._id != null;
+  }
+*/
 }

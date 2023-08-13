@@ -1,9 +1,11 @@
-import { Component, OnDestroy } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
+import { Component, OnDestroy, HostListener  } from '@angular/core';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 
 import { Account } from '@app/document.schema';
 import { AccountService } from '@app/services/account.service';
+import { environment } from '@environments/environment';
 
 export let browserRefresh = false;
 
@@ -14,22 +16,22 @@ export let browserRefresh = false;
 })
 export class AppComponent implements OnDestroy {
   account?: Account | null; 
-  title = 'sandbox-node-cli';
-  subscription: Subscription;
+  title = environment.title;
   
   constructor(
-    private accountService: AccountService,
-    private router: Router) {
+    private accountService: AccountService) {
       this.accountService.account.subscribe(account => this.account = account);
-      this.subscription = router.events.subscribe((event) => {
-        if (event instanceof NavigationStart) {
-          browserRefresh = !router.navigated;
-        }
-    });
   }
+
+  
+   // call this event handler before browser refresh
+@HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
+  console.debug("Processing beforeunload...", event);
+}
+
   
   ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
+
 
 }

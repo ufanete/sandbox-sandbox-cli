@@ -15,9 +15,7 @@ export class PostItemComponent {
   post: Post = new Post();
 
   
-  constructor(private sanitizer: DomSanitizer) {
-    console.log(this.post.style);
-  }
+  constructor(private sanitizer: DomSanitizer) {}
 
   sanitize(src: string): string {
     //bypassSecurityTrustResourceUrl

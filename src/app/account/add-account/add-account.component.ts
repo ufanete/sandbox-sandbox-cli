@@ -40,16 +40,10 @@ export class AddAccountComponent implements OnInit {
     // stop here if form is invalid
     if (this.form.invalid) {
       return;
-  }
+    }
 
     this.loading = true;
     this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.form.invalid) {
-      alert('Please add a Username!');
-      return;
-    }
 
     console.warn('Your order has been submitted', this.form.value);
 
@@ -61,8 +55,6 @@ export class AddAccountComponent implements OnInit {
           console.dir(account, "accountService subscription");
           if (account != null) {
             this.account = account;
-            this.form.reset();
-            
             // redirect to home page
             const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
             console.dir(returnUrl);

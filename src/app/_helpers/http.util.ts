@@ -1,4 +1,5 @@
 import {  HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Account } from '@app/document.schema';
 import { throwError } from 'rxjs';
 
 /** Error Handler */
@@ -15,8 +16,13 @@ export function handleError(error: HttpErrorResponse) {
     // Return an observable with a user-facing error message.
     return throwError(() => new Error('Something bad happened; please try again later.'));
 }
-export const httpOptions = {
-    headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-    })
-};
+
+export function getHeader(account: Account | null) {
+    return {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': account?.token || ""
+        })
+    }
+
+}

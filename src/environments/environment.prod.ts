@@ -1,4 +1,5 @@
 export const environment = {
+    title: "Sandbox Node",
     production: true,
     API_URL: '/api/',
     API_URL_ACCOUNT: '/api/account',

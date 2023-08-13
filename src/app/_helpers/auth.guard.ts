@@ -1,35 +1,21 @@
-﻿import { Injectable, OnDestroy } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+﻿import { Injectable, OnDestroy, inject } from '@angular/core';
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-import { Account, JwtToken } from '@app/document.schema';
 import { AccountService } from '@app/services';
+import { catchError, map, of } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
-export class AuthGuard implements OnDestroy {
-    
-    constructor(
-        private router: Router,
-        private accountService: AccountService
-    ) {}
-
-    async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        console.log("1 - canActivate");
-        return this.accountService.isLoggedIn2().then((isLoggedIn)=>{
-            
-        console.log("3 - canActivate", isLoggedIn);
-        
-        if (isLoggedIn) {
-            // authorised so return true
-            return true;
-        }
-
-        // not logged in so redirect to login page with the return url
-        this.router.navigate(['/account/login'], 
-            { queryParams: { returnUrl: state.url }});
-        
-        return false;
-        });
-    }
-    
-    ngOnDestroy() { }
-}
+export const canActivate = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ) => {
+    const authService = inject(AccountService);
+    const router = inject(Router);
+  
+    return authService.isLoggedIn().pipe(
+      map(() => true),
+      catchError(() => {
+        router.navigate(['/account/login']);
+        return of(false);
+      })
+    );
+};

@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+    title: "Sandbox Node (Test)",
     production: false,
     API_URL: '/api/',
     API_URL_ACCOUNT: '/api/account',
