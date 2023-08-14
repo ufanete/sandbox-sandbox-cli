@@ -7,8 +7,6 @@ import { Account } from '@app/document.schema';
 import { AccountService } from '@app/services/account.service';
 import { environment } from '@environments/environment';
 
-export let browserRefresh = false;
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

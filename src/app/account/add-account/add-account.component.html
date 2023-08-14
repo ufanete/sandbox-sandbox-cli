@@ -1,80 +1,132 @@
-<div class="container-fluid">
-  <div class="container d-flex justify-content-center">
-      <a href="#" title="Logo">
-          <img class="logo" src="assets/logo.png" alt="Logo">
-      </a>
+<div class="container-fluid p-4">
+  <div class="">
+    
+    <div class="row">
+      <div class="col-12">
+        <a href="#" title="Logo">
+            <img class="logo" src="assets/logo.png" alt="Logo">
+        </a>
+      </div>
+    </div>
 
-      <div class="row">
-        <div class="col">
-          <button (click)="goBack()" class="btn btn-link">&laquo; Previous</button>
+    <div class="row">
+      <div class="col-12">
+        <button (click)="goBack()" class="btn btn-link">&laquo; Previous</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="login-welcome-row">
+            <h1>Register</h1>
+            <p>Please enter your details!</p>
         </div>
       </div>
-
-      <div class="row">
-        <div class="col">
-          <div class="login-welcome-row">
-              <h1>Welcome back &#x1F44F;</h1>
-              <p>Please enter your details!</p>
+    </div>
+      
+    <div class="row">
+      <div class="col">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="d-grid gap-3">
+          <div class="row">
+              <div class="col">
+                  <div class="form-floating">
+                      <input
+                          type="text"
+                          name="firstname"
+                          formControlName="firstname"
+                          id="firstname"
+                          placeholder="First Name"
+                          class="form-control"
+                          required
+                          />
+                      <label for="firstname">First Name</label>
+                  </div>
+              </div>
+              <div class="col">
+                  <div class="form-floating">
+                      <input
+                          type="text"
+                          name="lastname"
+                          formControlName="lastname"
+                          id="lastname"
+                          placeholder="Last Name"
+                          class="form-control"
+                          required
+                          />
+                      <label for="lastname">Last Name</label>
+                  </div>
+              </div>
           </div>
-          <form [formGroup]="form" (ngSubmit)="onSubmit()" class="my-form">
-            <div class="form-floating">
-              <input
-                type="text"
-                name="username"
-                formControlName="username"
-                id="username"
-                placeholder="Username"
-                class="form-control"
-                required
-                />
-              <label for="username">Username</label>
-            </div>
-            <div class="form-floating">
-              <input
-                type="text"
-                name="email"
-                formControlName="email"
-                id="email"
-                placeholder="Email"
-                class="form-control"
-                required
-                />
-              <label for="email">Email</label>
-            </div>
-            <div class="form-floating">
-              <input
-                type="text"
-                name="password"
-                formControlName="password"
-                id="password"
-                placeholder="Password"
-                class="form-control"
-                autocomplete="new-password"
-                required
-                />
-              <label for="password">Password</label>
-            </div>
-            <div class="form-floating">
-              <input
-                type="text"
-                name="password_conf"
-                formControlName="password_conf"
-                id="password_conf"
-                placeholder="Confirm password"
-                class="form-control"
-                autocomplete="new-password"
-                required
-                />
-              <label for="password_conf">Confirm password</label>
-            </div>
-            <button [disabled]="!form.valid || loading"  type="submit" class="my-form__button" value="Login">
-              <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
-              Register
+          <div class="row">
+              <div class="col">
+                  <div class="form-floating">
+                      <input
+                          type="text"
+                          name="nickname"
+                          formControlName="nickname"
+                          id="nickname"
+                          placeholder="Nickname"
+                          class="form-control"
+                          />
+                      <label for="nickname">NICKNAME</label>
+                  </div>
+              </div>
+              <div class="col">
+                  <div class="form-floating">
+                      <input
+                          type="text"
+                          name="email"
+                          formControlName="email"
+                          id="email"
+                          placeholder="Email"
+                          class="form-control"
+                          required
+                          />
+                      <label for="email">EMAIL</label>
+                  </div>
+              </div>
+          </div>
+          
+          <div class="row">
+              <div class="col">
+                  <div class="form-floating">
+                      <input
+                          type="text"
+                          name="password"
+                          formControlName="password"
+                          id="password"
+                          placeholder="Password"
+                          class="form-control"
+                          autocomplete="new-password"
+                          required
+                          />
+                      <label for="password">PASSWORD</label>
+                  </div>
+              </div>
+              <div class="col">
+                  <div class="form-floating">
+                      <input
+                          type="text"
+                          name="password_conf"
+                          formControlName="password_conf"
+                          id="password_conf"
+                          placeholder="Confirm password"
+                          class="form-control"
+                          autocomplete="new-password"
+                          required
+                          />
+                      <label for="password_conf">CONFIRM PASSWORD</label>
+                  </div>
+              </div>
+          </div>
+          
+          <button [disabled]="!form.valid || loading"  type="submit" class="my-form__button" value="Login">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+            Register
           </button>
-        
-          </form>
-
+      
+        </form>
       </div>
-      </div>
+    </div>
   </div>
 </div>

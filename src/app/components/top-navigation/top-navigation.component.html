@@ -12,28 +12,40 @@
                 <button
                     type="button"
                     class="navbar-toggler border-0"
-                    id="dropdownManual"
+                    id="dropDownProfile"
                     ngbDropdownAnchor
                     (click)="myDrop.toggle()"
                 >
                     <img class="img-profile rounded-circle" src="/assets/img/undraw_profile.svg">
                 </button>
-                <div ngbDropdownMenu aria-labelledby="dropdownManual" class="m-2 p-2 shadow">
+                <div ngbDropdownMenu aria-labelledby="dropDownProfile" class="m-2 p-2 shadow">
                     <div class="card border-0" [ngStyle]="{width: '20rem'}">
-                        <img class="img-profile rounded-circle card-img-top" src="/assets/img/undraw_profile.svg">
                         <div class="card-body">
-                            <h5 class="card-title">{{account?.username}}</h5>
-                            <h6 class="">{{account?.email}}</h6>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <h5 class="card-title">{{account.firstname}}</h5>
+                            <p class="card-text">{{account.email}}</p>
+                            <div class="d-grid">
+                                <button class="btn btn-lg btn-outline-primary" (click)="goToProfile()" type="button">
+                                    Manage your account
+                                </button>
+                            </div>
+                            <ul class="dropdown-menu">
+                                <li><span class="dropdown-item-text">Dropdown item text</span></li>
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
                         </div>
+                        <!--
                         <ul class="list-group list-group-flush">
                           <li class="list-group-item">An item</li>
                           <li class="list-group-item">A second item</li>
                           <li class="list-group-item">A third item</li>
-                        </ul>
-                        <div class="card-body">
-                          <a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a>
+                        </ul>-->
+                        <hr/>
+                        <div class="card-body gap-2">
+                            <button class="btn btn-link" (click)="logout()" type="button">
+                                Logout
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -42,24 +54,15 @@
         <ng-template #content let-offcanvas>
             <div class="offcanvas-header">
                 <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
-                <h4 class="offcanvas-title" id="offcanvas-basic-title">{{account?.username}} Logged In: {{ isSignedIn }}</h4>
+                <h4 class="offcanvas-title" id="offcanvas-basic-title">{{account.firstname}} Logged In: {{ isSignedIn }}</h4>
             </div>
             <div class="offcanvas-body sidebar sidebar-dark accordion">
                 
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <a [routerLink]="['/profile']" routerLinkActive="active">Profile</a>
-                    </li>
-                    <li class="list-group-item">
                         <a [routerLink]="['/account/login']" routerLinkActive="active">Login</a></li>
                     <li class="list-group-item">
                         <a [routerLink]="['/chat']" routerLinkActive="active">chat</a>
-                    </li>
-                    <li class="list-group-item">
-                        <button class="btn bg-gradient-dark" (click)="logout()" type="button">Logout</button>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="#" (click)="logout()" >logout click</a>
                     </li>
                     <li class="list-group-item"><a [routerLink]="['/account/register']" routerLinkActive="active">signup</a></li>
                   </ul>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 
-import { handleError, getHeader } from '@app/_helpers/http.util';
+import { handleError, getHeader } from '@app/helpers/http.util';
 import { User, Post } from '@app/document.schema'
 import { environment } from '@environments/environment';
 

@@ -1,6 +1,8 @@
 export interface Account {
   _id?: string;
-  username: string;
+  firstname: string;
+  lastname: string;
+  nickname: string;
   email: string;
   password: string;
   password_conf?: string;
@@ -8,7 +10,9 @@ export interface Account {
 }
 export class AccountObject implements Account {
   _id?: string | undefined;
-  username: string = "";
+  firstname: string = "";
+  lastname: string = "";
+  nickname: string ="";
   email: string = "";
   password: string = "";
   password_conf?: string | undefined;

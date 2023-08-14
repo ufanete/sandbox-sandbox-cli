@@ -4,7 +4,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { BehaviorSubject, Observable, catchError, firstValueFrom  } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { handleError, getHeader } from '../_helpers/http.util';
+import { handleError, getHeader } from '../helpers/http.util';
 import { Account, AccountObject, JwtTokenObject, JwtToken } from '../document.schema';
 import { environment } from '@environments/environment';
 
@@ -30,7 +30,7 @@ export class AccountService {
   }
 
   /** Get user in session */
-  public get userValue(): Account {
+  public get accountValue(): Account {
     return this.account.value;
   }
 
@@ -55,11 +55,15 @@ export class AccountService {
     );
   }
 
-  updateUser(user: Account): Observable<Account> {
-    const url = `${environment.API_URL_USER}/${user._id}`;
-    return this.http.put<Account>(url, user, getHeader(this.userValue)).pipe(
-      catchError(handleError)
-    );
+  update(account: Account): Observable<Account> {
+    const url = `${environment.API_URL_ACCOUNT}/${this.accountValue._id}`;
+    return this.http.put<Account>(url, account, getHeader(this.accountValue))
+      .pipe(catchError(handleError))
+      .pipe(map(account => {
+          console.debug("Update ->", account);
+          this.setAccountValue(account);
+          return account;
+      }));
   }
 
   /**
@@ -69,9 +73,10 @@ export class AccountService {
    * @returns 
    */
   register(account: Account): Observable<Account> {
-    return this.http.post<Account>(`${environment.API_URL_ACCOUNT}/register`, account, getHeader(this.userValue))
+    return this.http.post<Account>(`${environment.API_URL_ACCOUNT}/register`, account, getHeader(this.accountValue))
       .pipe(catchError(handleError))
       .pipe(map(account => {
+          console.debug("Register ->", account);
           this.setAccountValue(account);
           return account;
       }));
@@ -100,7 +105,7 @@ export class AccountService {
    * isSignedIn is True if logged into an existing User Account
    */
   isSignedIn():  Observable<JwtToken>  {
-    return this.http.post<JwtToken>(`${environment.API_URL_ACCOUNT}/isSignedIn`, null, getHeader(this.userValue))
+    return this.http.post<JwtToken>(`${environment.API_URL_ACCOUNT}/isSignedIn`, null, getHeader(this.accountValue))
       .pipe(
         catchError(handleError)
       ).pipe(

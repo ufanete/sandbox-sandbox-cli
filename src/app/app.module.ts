@@ -7,13 +7,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserComponent } from './components/user/user.component';
-import { PostsComponent } from './components/posts/posts.component';
-import { PostItemComponent } from './components/post-item/post-item.component';
-import { TopNavigationComponent } from './components/top-navigation/top-navigation.component';
-import { ChatRoomComponent } from './components/chat-room/chat-room.component';
-import { ErrorInterceptor, JwtInterceptor } from './_helpers';
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { ErrorInterceptor, JwtInterceptor } from './helpers';
+import { ChatRoomComponent, TopNavigationComponent,
+   UserComponent, PostsComponent, PostItemComponent } from '@app/components';
 
 
 @NgModule({
@@ -23,8 +19,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     PostsComponent,
     PostItemComponent,
     TopNavigationComponent,
-    ChatRoomComponent,
-    EditProfileComponent
+    ChatRoomComponent
   ],
   imports: [
     BrowserModule,

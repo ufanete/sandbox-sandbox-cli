@@ -5,7 +5,7 @@ import { catchError, map, of } from 'rxjs';
 import { AccountService } from '@app/services';
 import { environment } from '@environments/environment';
 
-export const isSignedIn = (
+export const IsSignedIn = (
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ) => {
@@ -24,7 +24,7 @@ export const isSignedIn = (
 };
 
 
-export const isSignedOut = (
+export const IsSignedOut = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
 ) => {

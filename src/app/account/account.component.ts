@@ -9,8 +9,9 @@ export class AccountComponent {
         private router: Router,
         private accountService: AccountService
     ) {
+        console.debug("AccountComponent redirecting home if logged in");
         // redirect to home if already logged in
-        if (this.accountService.userValue) {
+        if (this.accountService.accountValue) {
             this.router.navigate(['/']);
         }
     }

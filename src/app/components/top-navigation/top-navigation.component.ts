@@ -1,11 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {  NgbOffcanvas, OffcanvasDismissReasons, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import { Account, JwtToken } from '@app/document.schema';
-import { AccountService } from '@app/services/account.service';
+import { AccountService, RouterService } from '@app/services';
 import {environment} from '@environments/environment';
 
 @Component({
@@ -19,7 +18,7 @@ export class TopNavigationComponent {
   closeResult = '';
   isUserLoggedIn: BehaviorSubject<boolean>;
   title: string = environment.title;
-  account: Account | undefined;
+  account: Account;
   /** The side panel options */
   panelOptions:Object = {
     panelClass: "bg-gradient-dark text-black bg-transparent", 
@@ -30,13 +29,12 @@ export class TopNavigationComponent {
   
   constructor(
     private accountService: AccountService,
-    private router: Router,
+    private router: RouterService,
     private offcanvasService: NgbOffcanvas
   ) {
+
     this.isUserLoggedIn = new BehaviorSubject(false);
-    this.accountService.account.subscribe((account: Account) => {
-      this.account = account;
-    });
+    this.account = this.accountService.accountValue;
 
     this.accountService.isUserLoggedIn.subscribe((token: JwtToken) => {
       this.isUserLoggedIn.next(token.isSignedIn);
@@ -46,23 +44,19 @@ export class TopNavigationComponent {
       console.log(token);
       this.isUserLoggedIn.next(token.isSignedIn);
     });
+
   }
 
+  /**
+   * Check if User Account is signedOn
+   */
   public get isSignedIn() : boolean {
     return this.isUserLoggedIn.value;
   }
-  
-  /** The logout function */
-  logout(): void {
-    this.accountService.signout()
-      .subscribe(() => {
-        this.offcanvasService.dismiss();
-        this.router.navigate([environment.PAGE_HOME]);
-      });
-  }
 
+  // this.offcanvasService.dismiss();
   /** Opens the side navigation panel */
-	open(content: any) {
+	open(content: any): void {
 		this.offcanvasService.open(content, this.panelOptions).result.then(
 			(result) => {
 				this.closeResult = `Closed with: ${result}`;
@@ -83,8 +77,23 @@ export class TopNavigationComponent {
 		}
 	}
 
+  /** 
+   * The logout function 
+   */
+  logout(): void {
+    this.accountService.signout()
+      .subscribe((response) => {
+        console.debug("logging out", response);
+        this.router.navigateByUrl(environment.PAGE_HOME);
+      });
+  }
+
   goToLogin(): void {
     this.router.navigateByUrl(environment.PAGE_LOGIN);
+  }
+
+  goToProfile(): void {
+    this.router.navigateByUrl(environment.PAGE_ACCOUNT_INFO_EDIT);
   }
 
   goToRegister() : void {

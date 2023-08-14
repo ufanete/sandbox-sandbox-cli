@@ -1,11 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators  } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
-import { AccountService } from '@app/services/account.service';
 import { Account } from '@app/document.schema';
 import { environment } from '@environments/environment';
+import { AccountService, RouterService } from '@app/services';
 
 @Component({
   selector: 'app-add-user',
@@ -13,25 +12,24 @@ import { environment } from '@environments/environment';
   styleUrls: ['./add-account.component.css']
 })
 export class AddAccountComponent implements OnInit {
-  account: Account | undefined;
-  form!: FormGroup;
+  form: FormGroup;
   loading = false;
   submitted = false;
 
   constructor(private formBuilder: FormBuilder, 
     private accountService: AccountService,
-    private route: ActivatedRoute,
-    private router: Router) {
-  }
+    private router: RouterService) {
+      this.form = this.formBuilder.group({
+        firstname: new FormControl('Barak', [Validators.required]),
+        lastname: new FormControl('Shelly', [Validators.required]),
+        nickname: new FormControl('Shelly'),
+        email: new FormControl('bill34@email.com', [Validators.required]),
+        password: new FormControl('WPd8dBAq4HrhDvS'),
+        password_conf: new FormControl('WPd8dBAq4HrhDvS')
+      });
+    }
 
-  ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      username: new FormControl('Barak'),//, Validators.required),
-      email: new FormControl('barak@email.com'),
-      password: new FormControl('WPd8dBAq4HrhDvS'),
-      password_conf: new FormControl('WPd8dBAq4HrhDvS')
-    });
-  }
+  ngOnInit(): void {}
   
   ngOnDestroy(): void {}
 
@@ -50,25 +48,21 @@ export class AddAccountComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: (account: Account) => {
-          console.debug(account);
+          console.debug(AddAccountComponent.name, account);
           if (account != null) {
-            this.account = account;
-            // redirect to home page
-            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || environment.PAGE_HOME;
-            this.router.navigateByUrl(returnUrl);
+            this.router.navigateByUrl(environment.PAGE_HOME);
           }
         },
         error: error => {
             console.dir(error);
             this.loading = false;
+            this.submitted = false;
         }
       });
   }
 
   goBack() : void {
-    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || environment.PAGE_LOGIN;
-    console.debug("in here", returnUrl);
       // redirect to home page
-    this.router.navigateByUrl(returnUrl);
+    this.router.navigateByUrl(environment.PAGE_LOGIN);
   }
 }

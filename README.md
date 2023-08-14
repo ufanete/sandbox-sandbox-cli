@@ -31,3 +31,18 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 npm uninstall materialize-css
 npm install materialize-css --save
 ng add @fortawesome/angular-fontawesome@latest
+ng generate service services/router
+
+## Dev resources
+[Angular Documentation](https://angular.io/docs)
+[RxJS](https://rxjs.dev/deprecations/to-promise) documentation.
+[ng-bootstrap](https://ng-bootstrap.github.io/#/getting-started) documentation.
+[MongoDB](https://account.mongodb.com/account/login)
+[MongoDB Tutorials](https://www.mongodb.com/developer/languages/javascript/creating-user-profile-store-game-nodejs-mongodb/)
+[MongoDB Documentation](https://www.mongodb.com/docs/develop-applications/)
+[MongoDB NodeJs](https://mongodb.github.io/node-mongodb-native/5.7/modules.html)
+[MongoDB Session Management](https://meghagarwal.medium.com/storing-sessions-with-connect-mongo-in-mongodb-64d74e3bbd9c)
+[Express Documentation](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
+
+## INteresting Reads
+[Tetris Game](https://medium.com/angular-in-depth/game-development-tetris-in-angular-64ef96ce56f7)
