@@ -6,5 +6,6 @@ export const environment = {
     API_URL_USER: '/api/users',
     API_URL_POST: '/api/posts',
     PAGE_LOGIN: '/account/login',
+    PAGE_SIGNUP: '/account/register',
     PAGE_HOME: '/'
 };

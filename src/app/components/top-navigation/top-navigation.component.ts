@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import {  NgbOffcanvas, OffcanvasDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import {  NgbOffcanvas, OffcanvasDismissReasons, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import { Account, JwtToken } from '@app/document.schema';
@@ -39,7 +39,11 @@ export class TopNavigationComponent {
     });
 
     this.accountService.isUserLoggedIn.subscribe((token: JwtToken) => {
-      console.debug('isLoggedIn', token);
+      this.isUserLoggedIn.next(token.isSignedIn);
+    });
+    
+    this.accountService.isSignedIn().subscribe((token: JwtToken) => {
+      console.log(token);
       this.isUserLoggedIn.next(token.isSignedIn);
     });
   }
@@ -78,4 +82,12 @@ export class TopNavigationComponent {
 			return `with: ${reason}`;
 		}
 	}
+
+  goToLogin(): void {
+    this.router.navigateByUrl(environment.PAGE_LOGIN);
+  }
+
+  goToRegister() : void {
+    this.router.navigateByUrl(environment.PAGE_SIGNUP);
+  }
 }

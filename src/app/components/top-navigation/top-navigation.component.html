@@ -1,16 +1,44 @@
-<nav class="navbar {{backgroundTheme}} sticky-top">
-    <div class="container-fluid">
-      
+<nav ngbNav class="navbar {{backgroundTheme}} sticky-top shadow-sm">
+    
+      <div class="container-fluid">
         <button class="navbar-toggler border-0 {{backgroundTheme}}" type="button" (click)="open(content)">
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" routerLink="/">{{title}}</a>
-        <ul class="nav nav-pills">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Active</a>
-            </li>
-        </ul>
-
+        <div class="justify-content-right">
+            <button *ngIf="!isSignedIn" class="btn" (click)="goToLogin()" href="#">Login</button>
+            <button *ngIf="!isSignedIn" class="btn" (click)="goToRegister()" href="#">Sign up</button>
+            <div *ngIf="isSignedIn" ngbDropdown #myDrop="ngbDropdown" display="dynamic" placement="bottom-end">
+                <button
+                    type="button"
+                    class="navbar-toggler border-0"
+                    id="dropdownManual"
+                    ngbDropdownAnchor
+                    (click)="myDrop.toggle()"
+                >
+                    <img class="img-profile rounded-circle" src="/assets/img/undraw_profile.svg">
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownManual" class="m-2 p-2 shadow">
+                    <div class="card border-0" [ngStyle]="{width: '20rem'}">
+                        <img class="img-profile rounded-circle card-img-top" src="/assets/img/undraw_profile.svg">
+                        <div class="card-body">
+                            <h5 class="card-title">{{account?.username}}</h5>
+                            <h6 class="">{{account?.email}}</h6>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">An item</li>
+                          <li class="list-group-item">A second item</li>
+                          <li class="list-group-item">A third item</li>
+                        </ul>
+                        <div class="card-body">
+                          <a href="#" class="card-link">Card link</a>
+                          <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <ng-template #content let-offcanvas>
             <div class="offcanvas-header">
                 <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
@@ -56,8 +84,6 @@
                 </div>
             </div>
         </ng-template>
-
-
     </div>
 </nav>
 <!--

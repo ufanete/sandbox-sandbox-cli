@@ -24,7 +24,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     PostItemComponent,
     TopNavigationComponent,
     ChatRoomComponent,
-    EditProfileComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

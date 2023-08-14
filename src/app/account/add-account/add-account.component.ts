@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 
 import { AccountService } from '@app/services/account.service';
 import { Account } from '@app/document.schema';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-add-user',
@@ -49,10 +50,11 @@ export class AddAccountComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: (account: Account) => {
+          console.debug(account);
           if (account != null) {
             this.account = account;
             // redirect to home page
-            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || environment.PAGE_HOME;
             this.router.navigateByUrl(returnUrl);
           }
         },
@@ -61,5 +63,12 @@ export class AddAccountComponent implements OnInit {
             this.loading = false;
         }
       });
+  }
+
+  goBack() : void {
+    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || environment.PAGE_LOGIN;
+    console.debug("in here", returnUrl);
+      // redirect to home page
+    this.router.navigateByUrl(returnUrl);
   }
 }

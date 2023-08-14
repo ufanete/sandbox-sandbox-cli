@@ -1,67 +1,80 @@
+<div class="container-fluid">
+  <div class="container d-flex justify-content-center">
+      <a href="#" title="Logo">
+          <img class="logo" src="assets/logo.png" alt="Logo">
+      </a>
 
-  <div class="login-wrapper">
-    <div class="my-form__wrapper">
- 
-  <div class="login-welcome-row">
-      <h1>Welcome back &#x1F44F;</h1>
-      <p>Please enter your details!</p>
+      <div class="row">
+        <div class="col">
+          <button (click)="goBack()" class="btn btn-link">&laquo; Previous</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="login-welcome-row">
+              <h1>Welcome back &#x1F44F;</h1>
+              <p>Please enter your details!</p>
+          </div>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" class="my-form">
+            <div class="form-floating">
+              <input
+                type="text"
+                name="username"
+                formControlName="username"
+                id="username"
+                placeholder="Username"
+                class="form-control"
+                required
+                />
+              <label for="username">Username</label>
+            </div>
+            <div class="form-floating">
+              <input
+                type="text"
+                name="email"
+                formControlName="email"
+                id="email"
+                placeholder="Email"
+                class="form-control"
+                required
+                />
+              <label for="email">Email</label>
+            </div>
+            <div class="form-floating">
+              <input
+                type="text"
+                name="password"
+                formControlName="password"
+                id="password"
+                placeholder="Password"
+                class="form-control"
+                autocomplete="new-password"
+                required
+                />
+              <label for="password">Password</label>
+            </div>
+            <div class="form-floating">
+              <input
+                type="text"
+                name="password_conf"
+                formControlName="password_conf"
+                id="password_conf"
+                placeholder="Confirm password"
+                class="form-control"
+                autocomplete="new-password"
+                required
+                />
+              <label for="password_conf">Confirm password</label>
+            </div>
+            <button [disabled]="!form.valid || loading"  type="submit" class="my-form__button" value="Login">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+              Register
+          </button>
+        
+          </form>
+
+      </div>
+      </div>
   </div>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="my-form">
-    <div class="text-field">
-      <label for="username">Username</label>
-      <input
-        type="text"
-        name="username"
-        formControlName="username"
-        id="username"
-        placeholder="Username"
-        class=""
-        required
-        />
-    </div>
-    <div class="text-field">
-      <label for="email">Email</label>
-      <input
-        type="text"
-        name="email"
-        formControlName="email"
-        id="email"
-        placeholder="Email"
-        class=""
-        required
-        />
-    </div>
-    <div class="text-field">
-      <label for="password">Password</label>
-      <input
-        type="text"
-        name="password"
-        formControlName="password"
-        id="password"
-        placeholder="Password"
-        class=""
-        autocomplete="new-password"
-        required
-        />
-    </div>
-    <div class="text-field">
-      <label for="password_conf">Confirm password</label>
-      <input
-        type="text"
-        name="password_conf"
-        formControlName="password_conf"
-        id="password_conf"
-        placeholder="Confirm password"
-        class=""
-        autocomplete="new-password"
-        required
-        />
-    </div>
-    <button [disabled]="!form.valid || loading"  type="submit" class="my-form__button" value="Login">
-      <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
-      Register
-  </button>
-
-  </form>
-</div> 
 </div>

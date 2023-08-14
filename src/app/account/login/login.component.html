@@ -1,9 +1,7 @@
-<div class="login-wrapper">
-    <div class="login-side">
-        <a href="#" title="Logo">
-            <img class="logo" src="assets/logo.png" alt="Logo">
-        </a>
-        <div class="my-form__wrapper">
+<div class="container-fluid">
+    <div class="container d-flex justify-content-center">
+        <div class="row">
+            <div class="col">
             <div class="login-welcome-row">
                 <h1>Welcome back &#x1F44F;</h1>
                 <p>Please enter your details!</p>
@@ -26,43 +24,33 @@
                     Or
                     <div class="divider-line"></div>
                 </div>
-                <div class="text-field">
-                    <label for="email">Email:</label>
+                <div class="form-floating">
                     <input type="email"
                             id="email"
                             name="email"
                             placeholder="Your Email"
                             formControlName="email" 
-                            class=""
+                            class="form-control"
                             required
                             autocomplete="username"  />
-
-                    <img alt="Email Icon"
-                            title="Email Icon"
-                            src="assets/email.svg">
+                    <label for="email">Email:</label>
                 </div>
-                <div class="text-field">
-                    <label for="password">Password:</label>
+                <div class="form-floating">
                     <input id="password"
                             type="password"
                             name="password"
                             placeholder="Your Password"
                             formControlName="password" 
-                            class=""
+                            class="form-control"
                             required
-                            autocomplete="current-password" />
-
-                    <img alt="Password Icon"
-                            title="Password Icon"
-                            src="assets/password.svg">
+                            autocomplete="current-password"
+                            title="Minimum 6 characters at least 1 Alphabet and 1 Number"
+                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
+                             />
+                    <label for="password">Password:</label>
                 </div>
-                
-                            <!--title="Minimum 6 characters at
-                                least 1 Alphabet and 1 Number"
-                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"-->
 
-                <!--<input type="submit" class="my-form__button" value="Login">-->
-                <button [disabled]="loading" type="submit" class="my-form__button" value="Login">
+                <button [disabled]="loading" type="submit" class="btn btn-primary" value="Login">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
                     Login
                 </button>
@@ -75,7 +63,7 @@
                         </a>
                     </div>
                     <div class="my-form__signup">
-                        <a class="btn btn-link" routerLink="/account/register" title="Create Account">
+                        <a class="btn btn-link" [routerLink]='["/account/register"]' title="Create Account">
                             Create Account
                         </a>
                     </div>
@@ -87,7 +75,9 @@
                 </div>
             </form>
         </div>
+        </div>
     </div>
+<!--
     <div class="info-side">
         <img src="assets/mock.png" alt="Mock" class="mockup">
         <div class="welcome-message">
@@ -98,5 +88,6 @@
             </p>
         </div>
     </div>
+-->
 </div>
 
