@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators  } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { faApple, faGoogle, faGithub, IconDefinition } from '@fortawesome/free-brands-svg-icons';
 
 import { Account } from '@app/document.schema';
 import { environment } from '@environments/environment';
@@ -12,6 +13,9 @@ import { AccountService, RouterService } from '@app/services';
   styleUrls: ['./add-account.component.css']
 })
 export class AddAccountComponent implements OnInit {
+  faApple: IconDefinition = faApple;
+  faGoogle: IconDefinition = faGoogle;
+  faGithub: IconDefinition = faGithub;
   form: FormGroup;
   loading = false;
   submitted = false;

@@ -1,93 +1,82 @@
-<div class="container-fluid">
-    <div class="container d-flex justify-content-center">
-        <div class="row">
-            <div class="col">
-            <div class="login-welcome-row">
-                <h1>Welcome back &#x1F44F;</h1>
-                <p>Please enter your details!</p>
+<!-- Section: Design Block -->
+<section>
+    <div class="container-fluid container-fs bg-light">
+        <div class="row d-flex flex-column min-vh-100 justify-content-center align-items-center">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card sb-light-blur shadow border-0" style="border-radius: 1rem;">
+                    <div class="card-body p-2 p-md-4 text-center">
+                        <h2 class="fw-bold mt-2 mb-3 text-cursive">Sign In</h2>
+                        <p>Please enter your login and password!</p>
+                        <div class="my-3">
+                            <form [formGroup]="form" (ngSubmit)="onSubmit()" class="d-grid gap-3 w-100">
+                                <!-- Email input -->
+                                <div class="form-floating">
+                                    <input class="form-control" type="email" id="email" name="email"
+                                        formControlName="email" placeholder="Your Email" autocomplete="username"
+                                        required />
+                                    <label for="email">Email</label>
+                                </div>
+
+                                <!-- Password input -->
+                                <div class="form-floating">
+                                    <input class="form-control" type="password" id="password" name="password"
+                                        formControlName="password" placeholder="Your Password"
+                                        autocomplete="current-password"
+                                        title="Minimum 6 characters at least 1 Alphabet and 1 Number"
+                                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" required />
+                                    <label for="password">Password</label>
+                                </div>
+                                <!-- 
+                                <div class="d-flex justify-content-around align-items-center mb-4">
+                                    Checkbox
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="form1Example3"
+                                            checked />
+                                        <label class="form-check-label" for="form1Example3"> Remember me </label>
+                                    </div>
+                                    <a href="#!">Forgot password?</a>
+                                </div> -->
+
+                                <!-- Submit button -->
+                                <button [disabled]="loading" type="submit"
+                                    class="btn btn-primary btn-lg btn-block text-cursive my-3 shadow" value="Login">
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                                    Sing in
+                                </button>
+
+                                <!-- External login buttons -->
+                                <div class="text-center">
+                                    <p>or sign in with:</p>
+
+                                    <button type="button" class="btn btn-link btn-floating mx-1 btn-lg">
+                                        <fa-icon [icon]="faGoogle" class="fa-xl"></fa-icon>
+                                    </button>
+
+                                    <button type="button" class="btn btn-link btn-floating mx-1 btn-lg">
+                                        <fa-icon [icon]="faApple" class="fa-xl"></fa-icon>
+                                    </button>
+
+                                    <button type="button" class="btn btn-link btn-floating mx-1 btn-lg">
+                                        <fa-icon [icon]="faGithub" class="fa-xl"></fa-icon>
+                                    </button>
+                                </div>
+
+                                <p class="mb-0">Don't have an account?
+                                    <a href="#!" [routerLink]='["/account/register"]' class="text-cursive fw-bold">
+                                        Create Account</a>
+                                </p>
+
+                                <a class="btn btn-primary btn-lg btn-block text-cursive" [routerLink]='["/"]'
+                                    style="background-color: #55acee" href="#!" role="button">
+                                    <i class="fab fa-twitter me-2"></i>Continue without account</a>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
             </div>
-            <form class="my-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-                <div class="socials-row">
-                    <a href="#"
-                        title="Use Google">
-                        <img src="assets/google.png" alt="Google">
-                        Log in with Google
-                    </a>
-                    <a href="#"
-                        title="Use Apple">
-                        <img src="assets/apple.png" alt="Apple">
-                        Log in with Apple
-                    </a>
-                </div>
-                <div class="divider">
-                    <div class="divider-line"></div>
-                    Or
-                    <div class="divider-line"></div>
-                </div>
-                <div class="form-floating">
-                    <input type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Your Email"
-                            formControlName="email" 
-                            class="form-control"
-                            required
-                            autocomplete="username"  />
-                    <label for="email">Email:</label>
-                </div>
-                <div class="form-floating">
-                    <input id="password"
-                            type="password"
-                            name="password"
-                            placeholder="Your Password"
-                            formControlName="password" 
-                            class="form-control"
-                            required
-                            autocomplete="current-password"
-                            title="Minimum 6 characters at least 1 Alphabet and 1 Number"
-                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"
-                             />
-                    <label for="password">Password:</label>
-                </div>
-
-                <button [disabled]="loading" type="submit" class="btn btn-primary" value="Login">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
-                    Login
-                </button>
-
-                <div class="my-form__actions">
-                    <div class="my-form__row">
-                        <span>Did you forget your password?</span>
-                        <a href="#" title="Reset Password">
-                            Reset Password
-                        </a>
-                    </div>
-                    <div class="my-form__signup">
-                        <a class="btn btn-link" [routerLink]='["/account/register"]' title="Create Account">
-                            Create Account
-                        </a>
-                    </div>
-                    <div class="my-form__signup">
-                        <a routerLink="/" title="Create Account">
-                            Continue without account
-                        </a>
-                    </div>
-                </div>
-            </form>
-        </div>
         </div>
     </div>
-<!--
-    <div class="info-side">
-        <img src="assets/mock.png" alt="Mock" class="mockup">
-        <div class="welcome-message">
-            <h2>Navitron Maps! ??</h2>
-            <p>
-                Your ultimate guide to navigating the world
-                and discovering new places with ease.
-            </p>
-        </div>
-    </div>
--->
-</div>
-
+</section>

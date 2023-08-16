@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { faApple, faGoogle, faGithub, IconDefinition } from '@fortawesome/free-brands-svg-icons';
+
 
 import { AccountService, RouterService } from '@app/services/';
 import { environment } from '@environments/environment';
@@ -12,6 +13,9 @@ import { environment } from '@environments/environment';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  faApple: IconDefinition = faApple;
+  faGoogle: IconDefinition = faGoogle;
+  faGithub: IconDefinition = faGithub;
   form!: FormGroup;
   loading = false;
   submitted = false;

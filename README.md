@@ -30,19 +30,29 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Further considerations 
 npm uninstall materialize-css
 npm install materialize-css --save
-ng add @fortawesome/angular-fontawesome@latest
+npm install @fortawesome/angular-fontawesome@latest
+npm install @fortawesome/free-brands-svg-icons --save
 ng generate service services/router
 
 ## Dev resources
+[FontAwesome](https://github.com/FortAwesome/angular-fontawesome)
+[Font Awesome Angular](https://www.npmjs.com/package/@fortawesome/angular-fontawesome)
 [Angular Documentation](https://angular.io/docs)
 [RxJS](https://rxjs.dev/deprecations/to-promise) documentation.
 [ng-bootstrap](https://ng-bootstrap.github.io/#/getting-started) documentation.
+
 [MongoDB](https://account.mongodb.com/account/login)
 [MongoDB Tutorials](https://www.mongodb.com/developer/languages/javascript/creating-user-profile-store-game-nodejs-mongodb/)
 [MongoDB Documentation](https://www.mongodb.com/docs/develop-applications/)
 [MongoDB NodeJs](https://mongodb.github.io/node-mongodb-native/5.7/modules.html)
 [MongoDB Session Management](https://meghagarwal.medium.com/storing-sessions-with-connect-mongo-in-mongodb-64d74e3bbd9c)
+[mongo connect](https://github.com/jdesboeufs/connect-mongo#readme)
+
 [Express Documentation](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
+
+[Socket IO Typescript](https://socket.io/docs/v4/typescript/)
+[Socket IO](https://github.com/socketio/socket.io#readme)
+[Socket IO Client](https://socket.io/docs/v4/client-installation/)
 
 ## INteresting Reads
 [Tetris Game](https://medium.com/angular-in-depth/game-development-tetris-in-angular-64ef96ce56f7)

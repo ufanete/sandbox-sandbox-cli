@@ -1,4 +1,11 @@
-.add-form {
-    margin-bottom: 40px;
-  }
-  
+.container-fs {
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+    background-image: url('/assets/img/signup_soccer_bg_light.gif');
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 40% auto;
+    position: relative;
+    background-attachment: fixed;
+}
