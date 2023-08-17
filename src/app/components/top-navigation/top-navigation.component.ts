@@ -13,7 +13,8 @@ import {environment} from '@environments/environment';
   styleUrls: ['./top-navigation.component.css']
 })
 export class TopNavigationComponent {
-  backgroundTheme:string = "bg-body-tertiary";
+  @Input() navClass = "sticky-top";
+  @Input() backgroundClass:string = "bg-body-tertiary";
   faBars = faBars;
   closeResult = '';
   isUserLoggedIn: BehaviorSubject<boolean>;
@@ -21,7 +22,7 @@ export class TopNavigationComponent {
   account: Account;
   /** The side panel options */
   panelOptions:Object = {
-    panelClass: "bg-gradient-dark text-black bg-transparent", 
+    panelClass: ".sb-light-blur text-black", 
     ariaLabelledBy: 'offcanvas-basic-title',
     backdrop: false,
     scroll: true
@@ -93,7 +94,7 @@ export class TopNavigationComponent {
   }
 
   goToProfile(): void {
-    this.router.navigateByUrl(environment.PAGE_ACCOUNT_INFO_EDIT);
+    this.router.navigateByUrl(environment.PAGE_ACCOUNT_INFO);
   }
 
   goToRegister() : void {

@@ -127,6 +127,7 @@ export class AccountService {
         catchError(handleError)
       ).pipe(
         map(response => {
+          console.debug('logut', response);
           this.removeAccountValue();
           return response;
         })

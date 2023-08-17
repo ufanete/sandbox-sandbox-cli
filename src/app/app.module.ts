@@ -1,25 +1,29 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule  } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ErrorInterceptor, JwtInterceptor } from './helpers';
-import { ChatRoomComponent, TopNavigationComponent,
-   UserComponent, PostsComponent, PostItemComponent } from '@app/components';
+import { ErrorInterceptor, JwtInterceptor, CustomReuseStrategy } from '@app/helpers';
+import {
+  ChatRoomComponent, TopNavigationComponent,
+  PostsComponent, PostItemComponent, UsersComponent, 
+  UserItemComponent
+} from '@app/components';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
     PostsComponent,
     PostItemComponent,
     TopNavigationComponent,
-    ChatRoomComponent
+    ChatRoomComponent,
+    UsersComponent,
+    UserItemComponent
   ],
   imports: [
     BrowserModule,

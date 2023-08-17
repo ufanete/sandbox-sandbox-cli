@@ -1,32 +1,33 @@
-
-.cascading-right {
-  margin-right: -50px;
+body, input {
+  font-family: FuturaPT,sans-serif;
+  font-size: 18px;
+  font-weight: 100;
 }
-.cascading-left {
-    margin-left: -50px;
-  }
 
-  @media (max-width: 991.98px) {
-    .cascading-right {
-      margin-right: 0;
-    }
-  }
+body, html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
 
-  .sb-light-blur{
-    
-    background: hsla(0, 0%, 100%, 0.55);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-  }
+.container-fs {
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  background-size: 40% auto;
+  position: relative;
+  background-attachment: fixed;
+  transition: box-shadow 300ms ease-in 0s;
+}
 
-  .text-cursive {
-    font-family: 'Kaushan Script', cursive;
-  }
-
-  body {
-    font-family: 'Kaushan Script', cursive;
-  }
-  
-  body, input, textarea, select {
-    font-family: "Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+.sb-light-blur {
+  background: hsla(0, 0%, 100%, 0.55);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
 }

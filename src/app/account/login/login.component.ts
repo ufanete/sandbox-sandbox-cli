@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import { faApple, faGoogle, faGithub, IconDefinition } from '@fortawesome/free-brands-svg-icons';
 
 
@@ -16,9 +17,11 @@ export class LoginComponent implements OnInit {
   faApple: IconDefinition = faApple;
   faGoogle: IconDefinition = faGoogle;
   faGithub: IconDefinition = faGithub;
+  faLightbulb: IconDefinition = faLightbulb;
   form!: FormGroup;
   loading = false;
   submitted = false;
+  title: String = environment.title;
 
   constructor(
       private formBuilder: FormBuilder,

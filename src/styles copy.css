@@ -1,0 +1,303 @@
+/* setup 
+
+    background-image: linear-gradient( 1deg,#0098ff 10%,#0e0e0ead 100%);
+    
+    background-image: linear-gradient( 180deg,#1f1f1f 10%,#373840 100%);
+    background-color: #ffffff;
+    opacity: .9;
+    border-radius: 20px;
+    */
+
+
+:root {
+    --primary: #4978F0;
+    --primary-light: #E1EEF5;
+    --secondary: #1D1D1D;
+    --background: #F4F1FF;
+    --text: #1F2346;
+}
+
+.bg-gradient-dark {    
+    
+    --border-bottom-width: 0.5px;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-left-width: 0.5px;
+    --border-right-width: 0.5px;
+    --border-style: solid;
+    --border-top-width: 0.5px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    
+    background: linear-gradient(rgba(241, 239, 231, 0.55) 0%, rgba(237, 231, 205, 0.45) 100%);
+    box-shadow: rgba(0, 0, 0, 0.11) 0px 0.636953px 0.636953px -0.9375px, rgba(0, 0, 0, 0.1) 0px 1.9316px 1.9316px -1.875px, rgba(0, 0, 0, 0.09) 0px 5.10612px 5.10612px -2.8125px, rgba(0, 0, 0, 0.04) 0px 16px 16px -3.75px;
+    opacity: 1;
+}
+
+
+/* Hide scrollbar for IE, Edge and Firefox 
+
+    background: linear-gradient(rgba(209, 209, 209, 0.55) 0%, rgba(102, 102, 102, 0.45) 100%);
+*/
+
+body::-webkit-scrollbar {
+    display: none;
+}
+body {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+
+/* IE and Edge *//* Firefox */
+
+.socials-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.socials-row img {
+    width: 24px;
+    height: 24px;
+}
+
+.socials-row > a {
+    padding: 8px;
+    border-radius: 8px;
+    width: 100%;
+    min-height: 48px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: var(--text);
+    padding: 8px;
+    border: 1px solid var(--primary-light);
+    font-weight: 700;
+}
+
+.socials-row > a:hover {
+    border: 1px solid var(--primary);
+}
+
+.divider {
+    display: flex;
+    flex-direction: row;
+    color: var(--secondary);
+    gap: 16px;
+    align-items: center;
+}
+
+.divider-line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--secondary);
+    opacity: .2;
+}
+
+
+/** DELETE ALL FROM HERE */
+.login-wrapper {
+    grid-template-columns: 4fr 3fr;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+.login-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-side {
+    height: 100vh;
+    color: #401B3D;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--background);
+}
+
+.info-side h2 {
+    margin-top: 48px;
+    color: var(--text);
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+}
+
+.info-side p {
+    font-size: 1.2rem;
+}
+
+.info-side img {
+    max-width: 860px;
+}
+
+.welcome-message {
+    max-width: 360px;
+}
+
+.logo {
+    height: 48px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.my-form__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    max-width: 460px;
+    width: 100%;
+    padding: 48px 32px;
+    height: fit-content;
+    box-shadow: 
+        rgba(100, 100, 111, 0.2)
+        0px 7px 29px 0px;
+}
+
+.my-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    gap: 16px;
+}
+
+.login-welcome {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.login-welcome-row {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.my-form__button {
+    background-color: var(--primary);
+    color: var(--text);
+    white-space: nowrap;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    line-height: 50px;
+    outline: none;
+    font-size: 18px;
+    letter-spacing: .025em;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 800;
+    min-height: 50px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0,0,0,.15);
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+}
+
+.my-form__actions {
+    display: flex;
+    flex-direction: column;
+    color: var(--secondary);
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.my-form__actions a {
+    color: var(--secondary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.my-form__actions a:hover {
+    text-decoration: underline;
+}
+
+.my-form__row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.my-form__signup {
+    display: flex;
+    justify-content: center;
+}
+
+.my-form__signup a {
+    color: var(--primary);
+    font-weight: 800;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.my-form__signup a:hover {
+    text-decoration: underline;
+}
+
+.text-field input {
+    color: var(--secondary);
+    font-size: 16px;
+    font-weight: 500;
+    max-width: 100%;
+    width: 100%;
+    border: 1px solid var(--secondary);
+    height: 50px;
+    letter-spacing: .03rem;
+    background-color: transparent;
+    outline: none;
+    transition: .25s;
+    border-radius: 8px;
+    text-indent: 20px;
+    margin-top: 8px;
+}
+
+.text-field {
+    position: relative;
+}
+
+.text-field img {
+    position: absolute;
+    right: -2px;
+    bottom: -4px;
+    width: 30px;
+    height: 30px;
+    transform: translate(-50%,-50%);
+    transform-origin: center;
+}
+
+.text-field input:focus {
+    border: 1px solid var(--primary);
+}
+
+.text-field label {
+    color: var(--secondary);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .03rem;
+    z-index: 10;
+}
+
+@media (max-width: 640px) {
+    .login-wrapper {
+        grid-template-columns: 1fr;
+        height: 100vh;
+    }
+    
+    .info-side {
+        flex-direction: column-reverse;
+        padding: 48px 48px 48px 32px;
+    }
+}

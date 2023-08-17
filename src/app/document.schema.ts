@@ -19,13 +19,10 @@ export class AccountObject implements Account {
   token?: string | undefined;
 }
 
-export interface User {
+export class User {
   _id?: string;
-  username: string;
-  email: string;
-  password: string;
-  password_conf?: string;
-  token?: string;
+  username: string="";
+  email: string="";
 }
 
 export class Post {

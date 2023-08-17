@@ -9,7 +9,12 @@ export class RouterService {
   constructor(
       private route: ActivatedRoute,
       private router: Router
-  ) { }
+  ) { 
+
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+  }
   navigateByUrl(url: string): Promise<boolean> {
     // get return url from query parameters or default to home page
     //const returnUrl = this.route.snapshot.queryParams['returnUrl'] || url;

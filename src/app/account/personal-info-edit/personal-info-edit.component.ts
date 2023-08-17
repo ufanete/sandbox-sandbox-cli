@@ -1,11 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators  } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 
 import { AccountService } from '@app/services/account.service';
 import { Account } from '@app/document.schema';
 import { environment } from '@environments/environment';
 import { first } from 'rxjs';
+import { RouterService } from '@app/services';
 
 @Component({
   selector: 'app-personal-info-edit',
@@ -20,8 +20,7 @@ export class PersonalInfoEditComponent {
 
   constructor(private formBuilder: FormBuilder, 
     private accountService: AccountService,
-    private route: ActivatedRoute,
-    private router: Router) {
+    private router: RouterService) {
       // set the account value
       this.account = accountService.accountValue;
       // init the form
@@ -33,8 +32,7 @@ export class PersonalInfoEditComponent {
       });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {}
 
@@ -66,9 +64,7 @@ export class PersonalInfoEditComponent {
       });}
 
   goBack() : void {
-    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || environment.PAGE_HOME;
-    console.debug(PersonalInfoEditComponent.name + "Personal info back", returnUrl);
       // redirect to home page
-    this.router.navigateByUrl(returnUrl);
+    this.router.navigateByUrl(environment.PAGE_HOME);
   }
 }

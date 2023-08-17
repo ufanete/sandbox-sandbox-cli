@@ -1,14 +1,6 @@
 <app-top-navigation></app-top-navigation>
-<!-- 
-*ngIf="isLoggedIn()"
-[title]="@environments"
--->
-<div class="wrapper full-page">
 
-  <div class="container-post y mandatory-scroll-snapping" dir="ltr">
-    <app-post-item
-    *ngFor="let post of posts"
-    [post]="post">
-    </app-post-item>
-  </div>
+<div class="container-fluid">
+  <app-post-item *ngFor="let post of posts" [post]="post">
+  </app-post-item>
 </div>

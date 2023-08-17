@@ -1,0 +1,50 @@
+.container-post::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgb(140 80 239,0.3);
+}
+.container-post::-webkit-scrollbar-thumb {
+background-color: darkgrey;
+outline: 1px solid slategrey;
+}
+
+.container-post {
+  scrollbar-width: none; 
+}
+
+.container-post {
+  display: flex;
+  overflow-y: auto;
+  outline: 1px dashed lightgray;
+  flex: none;
+}
+
+.container-post.y {
+  width: 100%;
+  height: calc(100vh - 20px);
+  flex-flow: column nowrap;
+}
+
+.y.mandatory-scroll-snapping {
+  scroll-snap-type: y mandatory;
+}
+
+.y.proximity-scroll-snapping {
+  scroll-snap-type: y proximity;
+}
+
+app-post-item  {
+  text-align: center;
+  scroll-snap-align: center;
+  flex: none;
+}
+
+app-post-item {
+  width: 100%;
+  color: #fff;
+  width: 100%;
+  height: calc(100vh - 20px);
+  display: block;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  scroll-snap-type: y mandatory;
+}

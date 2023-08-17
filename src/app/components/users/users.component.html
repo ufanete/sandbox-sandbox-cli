@@ -1,0 +1,9 @@
+<app-top-navigation></app-top-navigation>
+<section>
+  <div class="container py-5 h-100 bg-light">
+    <div class="container-fluid">
+      <app-user-item *ngFor="let user of users" [user]="user">
+      </app-user-item>
+    </div>
+  </div>
+</section>

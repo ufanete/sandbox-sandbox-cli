@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators  } from '@angular/forms';
+import { first } from 'rxjs';
+
+import { AccountService, RouterService} from '@app/services';
+import { Account } from '@app/document.schema';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-personal-info',
@@ -6,5 +12,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./personal-info.component.css']
 })
 export class PersonalInfoComponent {
+  account: Account;
+  loading = false;
+
+  constructor(private formBuilder: FormBuilder, 
+    private accountService: AccountService,
+    private router: RouterService) {
+      // set the account value
+      this.account = accountService.accountValue;
+  }
+
+  
+
+  goToProfileEdit(): void {
+    this.router.navigateByUrl(environment.PAGE_ACCOUNT_INFO_EDIT);
+  }
 
 }
