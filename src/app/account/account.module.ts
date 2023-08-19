@@ -8,17 +8,17 @@ import { AccountComponent } from '@app/account/account.component';
 import {
     LoginComponent, AddAccountComponent,
     HomeComponent, PersonalInfoComponent,
-    PersonalInfoEditComponent
+    PersonalInfoEditComponent, AccountFormComponent, AccountFormFieldComponent
 } from '@app/account';
-import { AccountFormComponent } from './account-form/account-form.component';
-import { AccountFormFieldComponent } from './account-form-field/account-form-field.component';
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
     imports: [
         CommonModule,
         ReactiveFormsModule,
         AccountRoutingModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        SharedModule,
     ],
     declarations: [
         AccountComponent,

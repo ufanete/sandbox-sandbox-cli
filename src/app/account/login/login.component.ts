@@ -8,6 +8,7 @@ import { faApple, faGoogle, faGithub, IconDefinition } from '@fortawesome/free-b
 import { AccountService, RouterService, UiFormService } from '@app/services';
 import { FormField } from '@app/models/form-field.model';
 import { environment } from '@environments/environment';
+import { UiAlertService } from '@app/shared/services/';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private accountService: AccountService,
     private router: RouterService,
-    private service: UiFormService
+    private service: UiFormService,
+    private alertService: UiAlertService
   ) {
     this.service.getQuestionsLogin().subscribe((question) => {
       this.questions = question;
@@ -38,23 +40,27 @@ export class LoginComponent implements OnInit {
   ngOnInit() { }
 
   onSubmit(form: FormGroup<any>): void {
+    this.submitted = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
     // stop here if form is invalid
     if (form.invalid) {
       return;
     }
 
-    this.submitted = true;
     this.loading = true;
     //this.loading.emit(true);
     this.accountService.login(form.value['email'], form.value['password'])
       .pipe(first())
       .subscribe({
         next: () => {
+
+          this.alertService.success('Registration successful', { keepAfterRouteChange: true });
           this.router.navigateByUrl(environment.PAGE_HOME);
         },
         error: (err) => {
-          console.log("LoginComponent ->")
-          console.dir(err.error);
+          this.alertService.error(err.error);
           this.loading = false;
           this.submitted = false;
         }

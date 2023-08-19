@@ -1,4 +1,8 @@
-const chatapp = function () {
+/**
+ * 
+ * @param {*} account 
+ */
+const chatapp = function (account) {
     var FADE_TIME = 150; // ms
     var TYPING_TIMER_LENGTH = 400; // ms
     var COLORS = [
@@ -28,7 +32,7 @@ const chatapp = function () {
     const addParticipantsMessage = (data) => {
         var message = '';
         if (data.numUsers === 1) {
-            message += "there's 1 participant";
+            message += "there's 1 participant (You)";
         } else {
             message += "there are " + data.numUsers + " participants";
         }
@@ -36,8 +40,8 @@ const chatapp = function () {
     }
 
     // Sets the client's username
-    const setUsername = () => {
-        username = cleanInput($('.usernameInput').val().trim());
+    const setUsername = ($username) => {
+        username = cleanInput($username || $('.usernameInput').val().trim());
         //cleanInput($usernameInput.val()).trim());
 
         // If the username is valid
@@ -77,7 +81,10 @@ const chatapp = function () {
 
     // Adds the visual chat message to the message list
     const addChatMessage = (data, options) => {
-        // Don't fade the message in if there is an 'X was typing'
+        if (data.typing)
+ {
+    return;
+ }        // Don't fade the message in if there is an 'X was typing'
         var $typingMessages = getTypingMessages(data);
         options = options || {};
         if ($typingMessages.length !== 0) {
@@ -91,12 +98,45 @@ const chatapp = function () {
         var $messageBodyDiv = $('<span class="messageBody">')
             .text(data.message);
 
+            
+        var $messageDiv = $('.message-template').clone();
+        $messageDiv.removeClass('message-template')
+        .removeClass('d-none')
+        .addClass('log');
+        $messageDiv.find('.message-text').text(data.message);
+        $messageDiv.find('.message-name').text(data.username)
+        .css('color', getUsernameColor(data.username));;
+
         var typingClass = data.typing ? 'typing' : '';
+        /*
+        old template
+
         var $messageDiv = $('<li class="message"/>')
             .data('username', data.username)
             .addClass(typingClass)
-            .append($usernameDiv, $messageBodyDiv);
+            .append($usernameDiv, $messageBodyDiv);*/
 
+            /*
+            new template
+            
+        var $messageDiv = $('.message-template').clone();
+        messageDiv.removeClass('message-template')
+        .removeClass('d-none')
+        .addClass('log')
+        .find('.message-text').text(message)
+        */
+
+        /*
+        
+not working first attempt
+        var $messageDiv = $('.message-template').clone();
+        $messageDiv.removeClass('message-template')
+        .removeClass('d-none')
+        .addClass('log')
+        .data('username', data.username)
+        .addClass(typingClass)
+        .append($usernameDiv, $messageBodyDiv);
+        */
         addMessageElement($messageDiv, options);
     }
 
@@ -279,5 +319,11 @@ const chatapp = function () {
     socket.on('reconnect_error', () => {
         log('attempt to reconnect has failed');
     });
+
+    socket.on("connect", () => {
+        
+        setUsername(account?.firstname);
+        // ...
+      });
 
 };

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Account } from '@app/models';
+import { AccountService } from '@app/services';
 
 // declare the javascript function here
-declare function chatapp(): any;
+declare function chatapp(account: Account): any;
 
 @Component({
   selector: 'app-chat-room',
@@ -9,10 +11,16 @@ declare function chatapp(): any;
   styleUrls: ['./chat-room.component.css']
 })
 export class ChatRoomComponent implements OnInit {
+  account: Account;
 
-  constructor() {
+  constructor(
+    private accountService: AccountService) {
+      
+    this.account = this.accountService.accountValue;
   }
   ngOnInit(): void {
-    chatapp();
+    chatapp(this.account!);
   }
+
+  //TODO add flag to preserve conversation
 }

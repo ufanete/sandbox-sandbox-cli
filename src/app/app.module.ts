@@ -13,6 +13,7 @@ import {
   PostsComponent, PostItemComponent, UsersComponent, 
   UserItemComponent
 } from '@app/components';
+import { SharedModule } from '@app/shared/shared.module';
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import {
     TopNavigationComponent,
     ChatRoomComponent,
     UsersComponent,
-    UserItemComponent
+    UserItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +33,8 @@ import {
     ReactiveFormsModule,
     NgbModule,
     NgbDatepickerModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SharedModule,
   ],
   providers: [
     //{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

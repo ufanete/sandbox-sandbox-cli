@@ -41,7 +41,10 @@
     {
       "type": "npm",
       "script": "build",
-      "group": "build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
       "problemMatcher": [],
       "label": "npm: build",
       "detail": "ng build"
@@ -49,10 +52,7 @@
     {
       "type": "npm",
       "script": "watch",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
+      "group": "build",
       "problemMatcher": [],
       "label": "npm: watch",
       "detail": "ng build"

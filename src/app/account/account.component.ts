@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
-import { AccountService } from '@app/services';
+import { AccountService, RouterService } from '@app/services';
 
 @Component({
     selector: 'app-account',
@@ -9,7 +8,7 @@ import { AccountService } from '@app/services';
   })
 export class AccountComponent {
     constructor(
-        private router: Router,
+        private router: RouterService,
         private accountService: AccountService
     ) {
         console.debug("AccountComponent redirecting home if logged in");
