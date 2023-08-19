@@ -1,6 +1,7 @@
 <app-top-navigation></app-top-navigation>
-
-<div class="container-fluid">
-  <app-post-item *ngFor="let post of posts" [post]="post">
-  </app-post-item>
-</div>
+<section>
+  <div class="py-5 h-100 bg-dark container-fluid">
+    <app-post-item *ngFor="let post of posts" [post]="post">
+    </app-post-item>
+  </div>
+</section>

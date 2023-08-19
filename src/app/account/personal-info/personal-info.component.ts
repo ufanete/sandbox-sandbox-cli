@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators  } from '@angular/forms
 import { first } from 'rxjs';
 
 import { AccountService, RouterService} from '@app/services';
-import { Account } from '@app/document.schema';
+import { Account } from '@app/models';;
 import { environment } from '@environments/environment';
 
 @Component({

@@ -3,7 +3,7 @@ import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 
-import { Account } from '@app/document.schema';
+import { Account } from '@app/models';
 import { AccountService } from '@app/services/account.service';
 import { environment } from '@environments/environment';
 

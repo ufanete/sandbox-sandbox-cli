@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, FormControl, Validators  } from '@angular/forms
 import { first } from 'rxjs/operators';
 import { faApple, faGoogle, faGithub, IconDefinition } from '@fortawesome/free-brands-svg-icons';
 
-import { Account } from '@app/document.schema';
+import { Account, FormField } from '@app/models';;
 import { environment } from '@environments/environment';
-import { AccountService, RouterService } from '@app/services';
+import { AccountService, RouterService, UiFormService } from '@app/services';
 
 @Component({
   selector: 'app-add-user',
@@ -19,10 +19,18 @@ export class AddAccountComponent implements OnInit {
   form: FormGroup;
   loading = false;
   submitted = false;
+  questions: FormField<any>[] = [];
 
   constructor(private formBuilder: FormBuilder, 
     private accountService: AccountService,
-    private router: RouterService) {
+    private router: RouterService,
+    private service: UiFormService) {
+
+
+      this.service.getQuestionsRegister().subscribe((question) => {
+        this.questions = question;
+      });
+
       this.form = this.formBuilder.group({
         firstname: new FormControl('Barak', [Validators.required]),
         lastname: new FormControl('Shelly', [Validators.required]),
@@ -31,13 +39,15 @@ export class AddAccountComponent implements OnInit {
         password: new FormControl('WPd8dBAq4HrhDvS'),
         password_conf: new FormControl('WPd8dBAq4HrhDvS')
       });
+
+
     }
 
   ngOnInit(): void {}
   
   ngOnDestroy(): void {}
 
-  onSubmit(): void {
+  onSubmit(form: FormGroup<any>): void {
     
     // stop here if form is invalid
     if (this.form.invalid) {

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { Post } from 'src/app/document.schema';
+import { Post } from '@app/models';;
 
 @Component({
   selector: 'app-post-item',

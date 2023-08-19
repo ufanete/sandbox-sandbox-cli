@@ -1,0 +1,25 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="d-grid gap-2 gap-md-3 w-100 p-2 p-md-3">
+
+  <div *ngFor="let question of questions" class="form-row">
+    <app-account-form-field [question]="question" [form]="form"></app-account-form-field>
+  </div>
+  
+
+  <!-- Submit button -->
+  <div class="text-center">
+    <button [disabled]="loading || !form.valid" type="submit"
+        class="btn btn-primary btn-lg btn-block text-cursive my-3 shadow-lg col-6 col-md-4 rounded-pill"
+        [value]="submitButtonValue">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+        Log in
+    </button>
+</div>
+
+</form>
+
+<!-- 
+<div *ngIf="payLoad" class="form-row">
+  <strong>Saved the following values</strong><br>{{payLoad}}
+</div>
+
+ -->

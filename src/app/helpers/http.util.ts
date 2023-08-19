@@ -1,5 +1,5 @@
 import {  HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Account } from '@app/document.schema';
+import { Account } from '@app/models';;
 import { throwError } from 'rxjs';
 
 /** Error Handler */

@@ -15,68 +15,33 @@
                     <div class="card-body p-2 p-md-4 pt-5 text-center">
                         <h1 class="fw-bold mt-3 mb-3">Welcome back</h1>
                         <p>One click away!</p>
-                        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="d-grid gap-2 gap-md-3 w-100 p-2 p-md-3">
-                            <!-- Email input -->
-                            <div class="form-floating">
-                                <input class="form-control" type="email" id="email" name="email" formControlName="email"
-                                    placeholder="Your Email" autocomplete="username" required />
-                                <label for="email">Email</label>
-                            </div>
 
-                            <!-- Password input -->
-                            <div class="form-floating">
-                                <input class="form-control" type="password" id="password" name="password"
-                                    formControlName="password" placeholder="Your Password"
-                                    autocomplete="current-password"
-                                    title="Minimum 6 characters at least 1 Alphabet and 1 Number"
-                                    pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$" required />
-                                <label for="password">Password</label>
-                            </div>
-                            <!-- 
-                                <div class="d-flex justify-content-around align-items-center mb-4">
-                                    Checkbox
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="form1Example3"
-                                            checked />
-                                        <label class="form-check-label" for="form1Example3"> Remember me </label>
-                                    </div>
-                                    <a href="#!">Forgot password?</a>
-                                </div> -->
+                        <app-account-form [questions]="questions" [submitButtonValue]="'Sign in'" (onSubmitForm)="onSubmit($event)">
+                        </app-account-form>
 
-                            <!-- Submit button -->
-                            <!-- External login buttons -->
-                            <div class="text-center">
-                                <button [disabled]="loading" type="submit"
-                                    class="btn btn-primary btn-lg btn-block text-cursive my-3 shadow-lg col-6 col-md-4 rounded-pill"
-                                    value="Login">
-                                    <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
-                                    Log in
-                                </button>
-                            </div>
+                        <!-- External login buttons -->
+                        <div class="text-center">
+                            <p>or log in with:</p>
 
-                            <!-- External login buttons -->
-                            <div class="text-center">
-                                <p>or log in with:</p>
+                            <button type="button" class="btn btn-link btn-floating mx-1 btn-lg">
+                                <fa-icon [icon]="faGoogle" class="fa-xl"></fa-icon>
+                            </button>
 
-                                <button type="button" class="btn btn-link btn-floating mx-1 btn-lg">
-                                    <fa-icon [icon]="faGoogle" class="fa-xl"></fa-icon>
-                                </button>
+                            <button type="button" class="btn btn-link btn-floating mx-1 btn-lg">
+                                <fa-icon [icon]="faApple" class="fa-xl"></fa-icon>
+                            </button>
 
-                                <button type="button" class="btn btn-link btn-floating mx-1 btn-lg">
-                                    <fa-icon [icon]="faApple" class="fa-xl"></fa-icon>
-                                </button>
+                            <button type="button" class="btn btn-link btn-floating mx-1 btn-lg">
+                                <fa-icon [icon]="faGithub" class="fa-xl"></fa-icon>
+                            </button>
+                        </div>
 
-                                <button type="button" class="btn btn-link btn-floating mx-1 btn-lg">
-                                    <fa-icon [icon]="faGithub" class="fa-xl"></fa-icon>
-                                </button>
-                            </div>
+                        <p class="mb-4">Don't have an account?
+                            <a href="#!" [routerLink]='["/account/register"]' class="text-cursive fw-bold">
+                                Create Account</a>
+                        </p>
 
-                            <p class="mb-4">Don't have an account?
-                                <a href="#!" [routerLink]='["/account/register"]' class="text-cursive fw-bold">
-                                    Create Account</a>
-                            </p>
 
-                        </form>
                     </div>
                 </div>
             </div>

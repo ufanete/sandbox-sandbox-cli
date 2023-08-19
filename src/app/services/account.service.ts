@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, catchError, firstValueFrom  } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, firstValueFrom, throwError  } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { handleError, getHeader } from '../helpers/http.util';
-import { Account, AccountObject, JwtTokenObject, JwtToken } from '../document.schema';
+import { handleError, getHeader } from '@app/helpers/http.util';
+import { Account, JwtToken } from '@app/models';
 import { environment } from '@environments/environment';
 
 @Injectable({
@@ -21,11 +21,11 @@ export class AccountService {
   ) { 
       let fromCache = localStorage.getItem(this.ACCOUNT_TAG);
       this.account = new BehaviorSubject(JSON.parse(fromCache!));
-      this.isUserLoggedIn = new BehaviorSubject(new JwtTokenObject());
+      this.isUserLoggedIn = new BehaviorSubject(new JwtToken());
 
       if (fromCache == null) {
         // set dummy account
-        this.setAccountValue(new AccountObject());
+        this.setAccountValue(new Account());
       }
   }
 
@@ -45,7 +45,7 @@ export class AccountService {
   /** Remove user from local storage and set current user to null */
   private removeAccountValue(): void {
     localStorage.removeItem(this.ACCOUNT_TAG);
-    this.account.next(new AccountObject());
+    this.account.next(new Account());
   }
   
   deleteUser(user: Account): Observable<Account> {
@@ -89,11 +89,11 @@ export class AccountService {
    * @param password 
    * @returns 
    */
-  login(email: string, password: string): Observable<Object> {
+  public login(email: string, password: string): Observable<Object> {
     return this.http.post<Account>(`${environment.API_URL_ACCOUNT}/authenticate`, 
       { email, password })
-      .pipe(catchError(handleError))
       .pipe(map(account => {
+        console.log(account);
         this.setAccountValue(account);
         return account;
       }));

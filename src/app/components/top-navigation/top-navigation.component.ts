@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import {  NgbOffcanvas, OffcanvasDismissReasons, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-import { Account, JwtToken } from '@app/document.schema';
+import { Account, JwtToken } from '@app/models';;
 import { AccountService, RouterService } from '@app/services';
 import {environment} from '@environments/environment';
 

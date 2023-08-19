@@ -10,7 +10,8 @@ import {
     HomeComponent, PersonalInfoComponent,
     PersonalInfoEditComponent
 } from '@app/account';
-import { TemplateAccountFormComponent } from './template-account-form/template-account-form.component';
+import { AccountFormComponent } from './account-form/account-form.component';
+import { AccountFormFieldComponent } from './account-form-field/account-form-field.component';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { TemplateAccountFormComponent } from './template-account-form/template-a
         HomeComponent,
         PersonalInfoComponent,
         PersonalInfoEditComponent,
-        TemplateAccountFormComponent,
+        AccountFormComponent,
+        AccountFormFieldComponent,
     ]
 })
 export class AccountModule { }

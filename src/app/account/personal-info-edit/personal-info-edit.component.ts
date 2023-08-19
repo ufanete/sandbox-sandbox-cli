@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators  } from '@angular/forms';
 
 import { AccountService } from '@app/services/account.service';
-import { Account } from '@app/document.schema';
+import { Account } from '@app/models';
 import { environment } from '@environments/environment';
 import { first } from 'rxjs';
 import { RouterService } from '@app/services';

@@ -10,82 +10,32 @@
             <p>Please enter your account information!</p>
 
             <!-- Sign up form -->
-            <form [formGroup]="form" (ngSubmit)="onSubmit()" class="d-grid gap-2 gap-md-3 w-100 p-2 p-md-3">
-              <!-- Firstname input -->
-              <div class="form-floating">
-                <input type="text" name="firstname" formControlName="firstname" id="firstname" placeholder="First Name"
-                  class="form-control" required />
-                <label for="firstname">First Name</label>
-              </div>
+            <app-account-form [questions]="questions" [submitButtonValue]="'Sign up'" (onSubmitForm)="onSubmit($event)">
+            </app-account-form>
+            <!-- Register buttons -->
+            <div class="text-center">
+              <p>or sign up with:</p>
 
-              <!-- Lastname input -->
-              <div class="form-floating">
-                <input type="text" name="lastname" formControlName="lastname" id="lastname" placeholder="Last Name"
-                  class="form-control" />
-                <label for="lastname">Last Name (Optional)</label>
-              </div>
-
-              <!-- Email input -->
-              <div class="form-floating">
-                <input type="text" name="email" formControlName="email" id="email" placeholder="Email"
-                  class="form-control" required />
-                <label for="email">EMAIL</label>
-              </div>
-
-              <!-- Password input -->
-              <div class="form-floating">
-                <input type="text" name="password" formControlName="password" id="password" placeholder="Password"
-                  class="form-control" autocomplete="new-password" required />
-                <label for="password">PASSWORD</label>
-              </div>
-
-              <!-- Repeat Password input -->
-              <div class="form-floating">
-                <input type="text" name="password_conf" formControlName="password_conf" id="password_conf"
-                  placeholder="Confirm password" class="form-control" autocomplete="new-password" required />
-                <label for="password_conf">REPEAT PASSWORD</label>
-              </div>
-
-              <!-- Checkbox -->
-              <!-- <div class="form-check d-flex justify-content-center mb-4">
-                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
-                <label class="form-check-label" for="form2Example33">
-                  Subscribe to our newsletter
-                </label>
-              </div> -->
-
-              <!-- Submit button -->
-              <button [disabled]="!form.valid || loading" type="submit"
-                class="btn btn-primary btn-lg btn-block mb-4 text-cursive" value="Login">
-                <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
-                Sign up
+              <button type="button" class="btn btn-link btn-floating mx-1">
+                <fa-icon [icon]="faGoogle" class="fa-xl"></fa-icon>
               </button>
 
-              <!-- Register buttons -->
-              <div class="text-center">
-                <p>or sign up with:</p>
+              <button type="button" class="btn btn-link btn-floating mx-1">
+                <fa-icon [icon]="faApple" class="fa-xl"></fa-icon>
+              </button>
 
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                  <fa-icon [icon]="faGoogle" class="fa-xl"></fa-icon>
-                </button>
+              <button type="button" class="btn btn-link btn-floating mx-1">
+                <fa-icon [icon]="faGithub" class="fa-xl"></fa-icon>
+              </button>
+            </div>
 
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                  <fa-icon [icon]="faApple" class="fa-xl"></fa-icon>
-                </button>
+            <!-- bypass account -->
+            <a class="btn btn-primary btn-lg btn-block text-cursive" [routerLink]='["/"]'
+              style="background-color: #55acee" href="#!" role="button">
+              <i class="fab fa-twitter me-2"></i>
+              Continue without account
+            </a>
 
-                <button type="button" class="btn btn-link btn-floating mx-1">
-                  <fa-icon [icon]="faGithub" class="fa-xl"></fa-icon>
-                </button>
-              </div>
-
-              <!-- bypass account -->
-              <a class="btn btn-primary btn-lg btn-block text-cursive" [routerLink]='["/"]'
-                style="background-color: #55acee" href="#!" role="button">
-                <i class="fab fa-twitter me-2"></i>
-                Continue without account
-              </a>
-
-            </form>
           </div>
         </div>
       </div>

@@ -32,7 +32,8 @@ npm uninstall materialize-css
 npm install materialize-css --save
 npm install @fortawesome/angular-fontawesome@latest
 npm install @fortawesome/free-brands-svg-icons --save
-ng generate service services/router
+ng generate service services/question
+ng generate component account/personal-info-edit
 
 ## Dev resources
 [FontAwesome](https://github.com/FortAwesome/angular-fontawesome)

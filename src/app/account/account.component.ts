@@ -3,7 +3,10 @@ import { Router } from '@angular/router';
 
 import { AccountService } from '@app/services';
 
-@Component({ templateUrl: 'account.component.html' })
+@Component({
+    selector: 'app-account',
+    templateUrl: './account.component.html'
+  })
 export class AccountComponent {
     constructor(
         private router: Router,
