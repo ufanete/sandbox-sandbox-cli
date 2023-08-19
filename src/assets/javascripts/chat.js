@@ -6,10 +6,16 @@ const chatapp = function (account) {
     var FADE_TIME = 150; // ms
     var TYPING_TIMER_LENGTH = 400; // ms
     var COLORS = [
-        '#e21400', '#91580f', '#f8a700', '#f78b00',
-        '#58dc00', '#287b00', '#a8f07a', '#4ae8c4',
-        '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
+        'blue', 'indigo', 'purple', 'pink',
+        'red', 'orange', 'yellow', 'green',
+        'teal', 'cyan'
     ];
+
+    const uuid = () => {
+        return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+            (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+        );
+    };
 
     // Initialize variables
     var $window = $(window);
@@ -22,6 +28,7 @@ const chatapp = function (account) {
 
     // Prompt for setting a username
     var username;
+    var userUuid;
     var connected = false;
     var typing = false;
     var lastTypingTime;
@@ -42,6 +49,7 @@ const chatapp = function (account) {
     // Sets the client's username
     const setUsername = ($username) => {
         username = cleanInput($username || $('.usernameInput').val().trim());
+        userUuid = uuid();
         //cleanInput($usernameInput.val()).trim());
 
         // If the username is valid
@@ -66,6 +74,7 @@ const chatapp = function (account) {
             $inputMessage.val('');
             addChatMessage({
                 username: username,
+                userUuid: userUuid,
                 message: message
             });
             // tell server to execute 'new message' and send along one parameter
@@ -81,10 +90,9 @@ const chatapp = function (account) {
 
     // Adds the visual chat message to the message list
     const addChatMessage = (data, options) => {
-        if (data.typing)
- {
-    return;
- }        // Don't fade the message in if there is an 'X was typing'
+        if (data.typing) {
+            //return;
+        }        // Don't fade the message in if there is an 'X was typing'
         var $typingMessages = getTypingMessages(data);
         options = options || {};
         if ($typingMessages.length !== 0) {
@@ -92,51 +100,45 @@ const chatapp = function (account) {
             $typingMessages.remove();
         }
 
-        var $usernameDiv = $('<span class="username"/>')
-            .text(data.username)
-            .css('color', getUsernameColor(data.username));
-        var $messageBodyDiv = $('<span class="messageBody">')
-            .text(data.message);
+        var isRecievedMessage = data.userUuid != userUuid;
 
-            
-        var $messageDiv = $('.message-template').clone();
-        $messageDiv.removeClass('message-template')
-        .removeClass('d-none')
-        .addClass('log');
-        $messageDiv.find('.message-text').text(data.message);
-        $messageDiv.find('.message-name').text(data.username)
-        .css('color', getUsernameColor(data.username));;
+
+        var $messageDiv;
+        if (data.typing) {
+            var $usernameDiv = $('<span class="username"/>')
+                .text(data.username)
+                .addClass(getUsernameColor(data.username));
+            var $messageBodyDiv = $('<span class="messageBody">')
+                .text(data.message);
+
+            $messageDiv = $('<li class="message"/>')
+                .data('username', data.username)
+                .addClass('typing')
+                .addClass('log')
+                .append($usernameDiv, $messageBodyDiv);
+
+
+        } else {
+            $messageDiv = $('.message-template').clone();
+            // set the message div alignment
+            $messageDiv.removeClass('message-template')
+                .data('username', data.username)
+                .removeClass('d-none')
+                .addClass('log')
+                .addClass(!isRecievedMessage ? 'align-items-end text-end' : ' align-items-start text-start');
+            // set the message bubble color
+            $messageDiv.find('.card')
+                .addClass(!isRecievedMessage ? '' : 'bg-dark text-white');
+            // Set the message
+            $messageDiv.find('.message-text').text(data.message);
+            // set the username
+            $messageDiv.find('.message-name').text(data.username)
+                .addClass(getUsernameColor(data.username));
+        }
+
 
         var typingClass = data.typing ? 'typing' : '';
-        /*
-        old template
 
-        var $messageDiv = $('<li class="message"/>')
-            .data('username', data.username)
-            .addClass(typingClass)
-            .append($usernameDiv, $messageBodyDiv);*/
-
-            /*
-            new template
-            
-        var $messageDiv = $('.message-template').clone();
-        messageDiv.removeClass('message-template')
-        .removeClass('d-none')
-        .addClass('log')
-        .find('.message-text').text(message)
-        */
-
-        /*
-        
-not working first attempt
-        var $messageDiv = $('.message-template').clone();
-        $messageDiv.removeClass('message-template')
-        .removeClass('d-none')
-        .addClass('log')
-        .data('username', data.username)
-        .addClass(typingClass)
-        .append($usernameDiv, $messageBodyDiv);
-        */
         addMessageElement($messageDiv, options);
     }
 
@@ -226,7 +228,7 @@ not working first attempt
         }
         // Calculate color
         var index = Math.abs(hash % COLORS.length);
-        return COLORS[index];
+        return `text-${COLORS[index]}`;
     }
 
     // Keyboard events
@@ -279,6 +281,7 @@ not working first attempt
 
     // Whenever the server emits 'new message', update the chat body
     socket.on('new message', (data) => {
+        console.dir(data);
         addChatMessage(data);
     });
 
@@ -321,9 +324,40 @@ not working first attempt
     });
 
     socket.on("connect", () => {
-        
+
         setUsername(account?.firstname);
         // ...
-      });
+    });
 
 };
+
+/*
+        old template
+        
+            var $messageDiv = $('<li class="message"/>')
+            .data('username', data.username)
+            .addClass(typingClass)
+            .append($usernameDiv, $messageBodyDiv);
+
+        */
+
+/*
+new template
+ 
+var $messageDiv = $('.message-template').clone();
+messageDiv.removeClass('message-template')
+.removeClass('d-none')
+.addClass('log')
+.find('.message-text').text(message)
+*/
+
+/*
+not working first attempt
+var $messageDiv = $('.message-template').clone();
+$messageDiv.removeClass('message-template')
+.removeClass('d-none')
+.addClass('log')
+.data('username', data.username)
+.addClass(typingClass)
+.append($usernameDiv, $messageBodyDiv);
+*/

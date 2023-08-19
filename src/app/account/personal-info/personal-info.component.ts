@@ -22,8 +22,6 @@ export class PersonalInfoComponent {
       this.account = accountService.accountValue;
   }
 
-  
-
   goToProfileEdit(): void {
     this.router.navigateByUrl(environment.PAGE_ACCOUNT_INFO_EDIT);
   }

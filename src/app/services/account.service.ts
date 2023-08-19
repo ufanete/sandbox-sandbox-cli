@@ -74,7 +74,7 @@ export class AccountService {
    */
   register(account: Account): Observable<Account> {
     return this.http.post<Account>(`${environment.API_URL_ACCOUNT}/register`, account, getHeader(this.accountValue))
-      .pipe(catchError(handleError))
+      //.pipe(catchError(handleError))
       .pipe(map(account => {
           console.debug("Register ->", account);
           this.setAccountValue(account);

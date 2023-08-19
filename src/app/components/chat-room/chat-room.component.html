@@ -14,7 +14,14 @@
                 <div class="list-group">
                   <ul class="messages"></ul>
                 </div>
-                <input class="inputMessage" placeholder="Type here..." />
+                <div class="input-group">
+                  <input type="text" class="form-control inputMessage" placeholder="Type here..."
+                    aria-label="Recipient's username with two button addons">
+                  <!-- <input type="text" class="form-control inputMessage" placeholder="Recipient's username" aria-label="Recipient's username with two button addons"> -->
+                  <button class="btn btn-outline-secondary" type="button">Button</button>
+                  <button class="btn btn-outline-secondary" type="button">Button</button>
+                </div>
+
               </li>
               <li class="login page">
                 <div class="form">
@@ -25,8 +32,8 @@
             </ul>
 
             <div class="row" data-masonry='{"percentPosition": true }'>
-             
-</div>
+
+            </div>
 
 
           </div>
@@ -36,15 +43,17 @@
   </div>
 </section>
 
-<div class="col-sm-6 col-lg-4 mb-4 message-template d-none">
-  <div class="card bg-primary text-white text-center p-3">
-    <figure class="mb-0">
-      <blockquote class="blockquote">
-        <p class="message-text">A well-known quote, contained in a blockquote element.</p>
-      </blockquote>
-      <figcaption class="blockquote-footer mb-0 text-white message-name">
-        Someone famous in <cite title="Source Title">Source Title</cite>
-      </figcaption>
-    </figure>
+<div class="row d-flex flex-column message-template d-none">
+  <div class="col-auto mb-1" [ngStyle]="{'max-width':'70%'}">
+    <div class="card bg-primary text-white p-3">
+      <figure class="mb-0">
+        <blockquote class="blockquote">
+          <p class="message-text"></p>
+        </blockquote>
+        <figcaption class="blockquote-footer mb-0 text-white message-name">
+          <span></span> <cite title="Source Title"></cite>
+        </figcaption>
+      </figure>
+    </div>
   </div>
 </div>
