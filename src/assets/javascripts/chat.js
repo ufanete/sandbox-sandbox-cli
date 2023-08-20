@@ -1,9 +1,9 @@
 /**
  * 
- * @param {*} account 
+ * @param {*} user 
  */
-const chatapp = function (account, messages) {
-    account.username = account.firstname;
+const chatapp = function (user, messages) {
+    user.username = user.firstname;
     var FADE_TIME = 150; // ms
     var TYPING_TIMER_LENGTH = 400; // ms
     var COLORS = [
@@ -29,7 +29,7 @@ const chatapp = function (account, messages) {
 
     // Prompt for setting a username
     var username;
-    var userUuid;
+    var userId = "";
     var connected = false;
     var typing = false;
     var lastTypingTime;
@@ -53,14 +53,14 @@ const chatapp = function (account, messages) {
         username = cleanInput($username || $('.usernameInput').val().trim());
         // If the username is valid
         if (username) {
-            userUuid = uuid();
+            userId = user._id;
             $loginPage.fadeOut();
             $chatPage.removeClass("d-none").fadeIn();
             $loginPage.off('click');
             $currentInput = $inputMessage.focus();
 
             // Tell the server your username
-            socket.emit('add user', account);
+            socket.emit('add user', user);
             return true;
         } else {
             return false;
@@ -77,8 +77,9 @@ const chatapp = function (account, messages) {
             $inputMessage.val('');
             addChatMessage({
                 username: username,
-                userUuid: userUuid,
-                message: message
+                userId: userId,
+                message: message,
+                timestamp: new Date()
             });
             // tell server to execute 'new message' and send along one parameter
             socket.emit('new message', message);
@@ -93,19 +94,12 @@ const chatapp = function (account, messages) {
 
     // Adds the visual chat message to the message list
     const addChatMessage = (data, options) => {
-        if (data.typing) {
-            //return;
-        }        // Don't fade the message in if there is an 'X was typing'
         var $typingMessages = getTypingMessages(data);
         options = options || {};
         if ($typingMessages.length !== 0) {
             options.fade = false;
             $typingMessages.remove();
         }
-
-
-        var isRecievedMessage = options.isRecievedMessage;
-
 
         var $messageDiv;
         if (data.typing) {
@@ -123,6 +117,8 @@ const chatapp = function (account, messages) {
 
 
         } else {
+            
+            var isRecievedMessage = data.userId.toString() != userId.toString();
             $messageDiv = $('.message-template').clone();
             // set the message div alignment
             $messageDiv.removeClass('message-template')
@@ -138,10 +134,10 @@ const chatapp = function (account, messages) {
             // set the username
             $messageDiv.find('.message-name').text(data.username)
                 .addClass(getUsernameColor(data.username));
+                $messageDiv.attr('title', data.timestamp.toString() );
         }
 
 
-        var typingClass = data.typing ? 'typing' : '';
 
         addMessageElement($messageDiv, options);
     }
@@ -285,8 +281,6 @@ const chatapp = function (account, messages) {
 
     // Whenever the server emits 'new message', update the chat body
     socket.on('new message', (data) => {
-        console.dir(data);
-        data.isRecievedMessage = data.userUuid != userUuid;
         addChatMessage(data);
     });
 
@@ -319,8 +313,8 @@ const chatapp = function (account, messages) {
 
     socket.on('reconnect', () => {
         log('you have been reconnected');
-        if (account) {
-            socket.emit('add user', account);
+        if (user) {
+            socket.emit('add user', user);
         }
     });
 
@@ -329,18 +323,17 @@ const chatapp = function (account, messages) {
     });
 
     socket.on("connect", () => {
-        var isInit = setUsername(account?.firstname);
+        var isInit = setUsername(user?.firstname);
 
         if (isInit && messages) {
             messages.forEach(element => {
                 let data = {
-                    username: account.firstname,
-                    message: element.message
+                    username: element.username[0],
+                    message: element.message,
+                    userId: element.userId,
+                    timestamp: element.timestamp
                 };
-                
-                addChatMessage(data, {
-                    isRecievedMessage: element.accountId != account._id
-                }); 
+                addChatMessage(data); 
             });
         }
 
