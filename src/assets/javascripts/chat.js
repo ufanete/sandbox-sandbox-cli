@@ -2,7 +2,8 @@
  * 
  * @param {*} account 
  */
-const chatapp = function (account) {
+const chatapp = function (account, messages) {
+    account.username = account.firstname;
     var FADE_TIME = 150; // ms
     var TYPING_TIMER_LENGTH = 400; // ms
     var COLORS = [
@@ -48,19 +49,21 @@ const chatapp = function (account) {
 
     // Sets the client's username
     const setUsername = ($username) => {
-        username = cleanInput($username || $('.usernameInput').val().trim());
-        userUuid = uuid();
-        //cleanInput($usernameInput.val()).trim());
 
+        username = cleanInput($username || $('.usernameInput').val().trim());
         // If the username is valid
         if (username) {
+            userUuid = uuid();
             $loginPage.fadeOut();
             $chatPage.removeClass("d-none").fadeIn();
             $loginPage.off('click');
             $currentInput = $inputMessage.focus();
 
             // Tell the server your username
-            socket.emit('add user', username);
+            socket.emit('add user', account);
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -100,7 +103,8 @@ const chatapp = function (account) {
             $typingMessages.remove();
         }
 
-        var isRecievedMessage = data.userUuid != userUuid;
+
+        var isRecievedMessage = options.isRecievedMessage;
 
 
         var $messageDiv;
@@ -125,10 +129,10 @@ const chatapp = function (account) {
                 .data('username', data.username)
                 .removeClass('d-none')
                 .addClass('log')
-                .addClass(!isRecievedMessage ? 'align-items-end text-end' : ' align-items-start text-start');
+                .addClass(isRecievedMessage ? 'align-items-start text-start' : 'align-items-end text-end');
             // set the message bubble color
             $messageDiv.find('.card')
-                .addClass(!isRecievedMessage ? '' : 'bg-dark text-white');
+                .addClass(isRecievedMessage ? 'bg-dark text-white': '');
             // Set the message
             $messageDiv.find('.message-text').text(data.message);
             // set the username
@@ -282,6 +286,7 @@ const chatapp = function (account) {
     // Whenever the server emits 'new message', update the chat body
     socket.on('new message', (data) => {
         console.dir(data);
+        data.isRecievedMessage = data.userUuid != userUuid;
         addChatMessage(data);
     });
 
@@ -314,8 +319,8 @@ const chatapp = function (account) {
 
     socket.on('reconnect', () => {
         log('you have been reconnected');
-        if (username) {
-            socket.emit('add user', username);
+        if (account) {
+            socket.emit('add user', account);
         }
     });
 
@@ -324,9 +329,21 @@ const chatapp = function (account) {
     });
 
     socket.on("connect", () => {
+        var isInit = setUsername(account?.firstname);
 
-        setUsername(account?.firstname);
-        // ...
+        if (isInit && messages) {
+            messages.forEach(element => {
+                let data = {
+                    username: account.firstname,
+                    message: element.message
+                };
+                
+                addChatMessage(data, {
+                    isRecievedMessage: element.accountId != account._id
+                }); 
+            });
+        }
+
     });
 
 };

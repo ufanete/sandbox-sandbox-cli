@@ -9,6 +9,7 @@ export const environment = {
     API_URL_ACCOUNT: '/api/account',
     API_URL_USER: '/api/users',
     API_URL_POST: '/api/posts',
+    API_URL_CHAT: '/api/chat',
     
     PAGE_HOME: '/',
     PAGE_CHAT: '/chat',
