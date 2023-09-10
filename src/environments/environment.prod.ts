@@ -9,6 +9,7 @@ export const environment = {
     
     PAGE_HOME: '/',
     PAGE_CHAT: '/chat',
+    PAGE_CHAT_PRIVATE: '/chat-private',
     PAGE_LOGIN: '/account/login',
     PAGE_SIGNUP: '/account/register',
     PAGE_ACCOUNT_HOME: '/account/home',

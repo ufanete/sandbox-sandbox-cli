@@ -1,3 +1,11 @@
+# TODO Resources
+[Chat app design overview](https://medium.com/flutter-community/realtime-chat-app-one-to-one-using-flutter-socket-io-node-js-acd4152c6a00)
+[Private Messaging](https://socket.io/get-started/private-messaging-part-1/)
+[Socket angular](https://www.digitalocean.com/community/tutorials/angular-socket-io)
+[Examples](https://github.com/topics/socket-io-chat-app)
+[Search Terms](https://www.google.com/search?q=socketio+angular+client&rlz=1C1CHBF_enCA1063CA1063&oq=socketio+angular+client&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCDUyOTZqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8)
+
+
 # SandboxNodeCli
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
@@ -28,6 +36,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 ## Further considerations 
+[Dark Mode](https://www.electronjs.org/docs/latest/tutorial/dark-mode)
 npm uninstall materialize-css
 npm install materialize-css --save
 npm install @fortawesome/angular-fontawesome@latest
@@ -36,6 +45,7 @@ ng generate service services/question
 ng generate component account/personal-info-edit
 
 ## Dev resources
+[NgIf pipes](https://angular.io/api/common/NgIf#storing-a-conditional-result-in-a-variable)
 [FontAwesome](https://github.com/FortAwesome/angular-fontawesome)
 [Font Awesome Angular](https://www.npmjs.com/package/@fortawesome/angular-fontawesome)
 [Angular Documentation](https://angular.io/docs)

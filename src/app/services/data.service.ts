@@ -10,6 +10,7 @@ import { environment } from '@environments/environment';
   providedIn: 'root',
 })
 export class DataService {
+  
   /**
    * NB: For any of the HTTP methods that return an observable, 
    * the caller, Component.update() must subscribe()
@@ -30,9 +31,24 @@ export class DataService {
     );
   }
 
-  /** Users */
+  /** 
+   * Users 
+   * 
+   */
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(environment.API_URL_USER).pipe(
+      catchError(handleError)
+    );
+  }
+
+  doUserSearch(value: string): Observable<User[]> {
+    return this.http.get<User[]>(`${environment.API_URL_USER}/search/${value}`).pipe(
+      catchError(handleError)
+    );
+  }
+  
+  getUser(userId: string): Observable<User> {
+    return this.http.get<User>(`${environment.API_URL_USER}/${userId}`).pipe(
       catchError(handleError)
     );
   }

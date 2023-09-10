@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { User } from '@app/models';;
+import { User } from '@app/models';
+import { RouterService } from '@app/services';
+import { environment } from '@environments/environment';
+;
 
 @Component({
   selector: 'app-user-item',
@@ -9,10 +12,26 @@ import { User } from '@app/models';;
 export class UserItemComponent {
   
   @Input()
-  user: User = new User();
+  index: number = 0;
 
+  @Input()
+  user!: User;
+
+  url: string = environment.PAGE_CHAT_PRIVATE;
   
-  constructor() {}
+  constructor(private router: RouterService) {
+  }
+  
+
+  goToChat() : void {
+    console.dir(this.user);
+    console.log(this.url);
+    
+    this.router.navigate([environment.PAGE_CHAT_PRIVATE, { id: this.user._id }]);
+    debugger;
+    //this.router.navigateByUrl(this.url);
+
+  }
 
 
 }

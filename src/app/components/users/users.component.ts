@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from '@app/models';;
 import { DataService } from '@app/services';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -9,6 +10,8 @@ import { DataService } from '@app/services';
 })
 export class UsersComponent {
   users: User[] = [];
+  
+  searchResult$: Observable<User[]> | null = null;
 
   constructor(private dataService: DataService) { }
 
@@ -16,5 +19,15 @@ export class UsersComponent {
     this.dataService.getUsers().subscribe((users) => {
       this.users = users;
     });
+  }
+
+  searchUser($event: any): void {
+    const value = $event.target.value;
+    console.log(value);
+    this.searchResult$ = this.dataService.doUserSearch(value);
+    /*.subscribe((searchResults) => {
+       = searchResults;
+      console.dir(searchResults);
+    });;*/
   }
 }

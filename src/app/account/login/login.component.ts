@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-
+          console.log(arguments);
           this.alertService.success('Registration successful', { keepAfterRouteChange: true });
           this.router.navigateByUrl(environment.PAGE_HOME);
         },

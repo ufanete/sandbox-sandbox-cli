@@ -117,7 +117,7 @@ const chatapp = function (user, messages) {
 
 
         } else {
-            
+
             var isRecievedMessage = data.userId.toString() != userId.toString();
             $messageDiv = $('.message-template').clone();
             // set the message div alignment
@@ -128,13 +128,13 @@ const chatapp = function (user, messages) {
                 .addClass(isRecievedMessage ? 'align-items-start text-start' : 'align-items-end text-end');
             // set the message bubble color
             $messageDiv.find('.card')
-                .addClass(isRecievedMessage ? 'bg-dark text-white': '');
+                .addClass(isRecievedMessage ? 'bg-dark text-white' : '');
             // Set the message
             $messageDiv.find('.message-text').text(data.message);
             // set the username
             $messageDiv.find('.message-name').text(data.username)
                 .addClass(getUsernameColor(data.username));
-                $messageDiv.attr('title', data.timestamp.toString() );
+            $messageDiv.attr('title', data.timestamp.toString());
         }
 
 
@@ -327,13 +327,18 @@ const chatapp = function (user, messages) {
 
         if (isInit && messages) {
             messages.forEach(element => {
-                let data = {
-                    username: element.username[0],
-                    message: element.message,
-                    userId: element.userId,
-                    timestamp: element.timestamp
-                };
-                addChatMessage(data); 
+                try {
+
+                    let data = {
+                        username: element.username[0],
+                        message: element.message,
+                        userId: element.userId,
+                        timestamp: new Date(element.timestamp)
+                    };
+                    addChatMessage(data);
+                } catch (e) {
+                    console.dir(e)
+                }
             });
         }
 

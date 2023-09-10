@@ -1,5 +1,5 @@
 export class User {
-    _id?: string | undefined;
+    _id: string = "";
     firstname: string = "";
     lastname: string = "";
     nickname: string = "";

@@ -1,7 +1,26 @@
 <app-top-navigation></app-top-navigation>
+<app-navigation-search-bar
+(onKeyDown)="searchUser($event)"
+></app-navigation-search-bar>
+<div *ngIf="searchResult$ | async as searchResult">
+<span *ngFor="let user of searchResult; let i = index">
+{{user.firstname}}
+</span></div>
+
 <section>
-  <div class="py-5 h-100 bg-dark container-fluid">
-    <app-user-item *ngFor="let user of users" [user]="user">
-    </app-user-item>
+  <div class="container px-4 py-5" id="custom-cards">
+    <h2 class="pb-2 border-bottom">Recent Users</h2>
+
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+
+      <app-user-item *ngFor="let user of users; let i = index" [user]="user" [index]="i">
+      </app-user-item>
+    </div>
   </div>
 </section>
+
+
+
+<!-- 
+<div class="py-5 h-100 bg-dark container-fluid">
+</div> -->

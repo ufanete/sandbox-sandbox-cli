@@ -14,6 +14,10 @@ import {
   UserItemComponent
 } from '@app/components';
 import { SharedModule } from '@app/shared/shared.module';
+import { NavigationFooterComponent } from './components/navigation-footer/navigation-footer.component';
+import { NavigationTopComponent } from './components/navigation-top/navigation-top.component';
+import { ChatPrivateComponent } from './components/chat-private/chat-private.component';
+import { NavigationSearchBarComponent } from './components/navigation-search-bar/navigation-search-bar.component';
 
 
 @NgModule({
@@ -25,6 +29,10 @@ import { SharedModule } from '@app/shared/shared.module';
     ChatRoomComponent,
     UsersComponent,
     UserItemComponent,
+    NavigationFooterComponent,
+    NavigationTopComponent,
+    ChatPrivateComponent,
+    NavigationSearchBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +45,7 @@ import { SharedModule } from '@app/shared/shared.module';
     SharedModule,
   ],
   providers: [
-    //{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     //{ provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
