@@ -1,59 +1,152 @@
 <app-top-navigation></app-top-navigation>
 <section>
   <div class="container-fluid container-fs bg-light py-3">
-    <div class="row d-flex flex-column min-vh-100 py-3 py-md-5 align-items-center">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div class="card sb-light-blur shadow border-0 mx-2 mx-md-1" style="border-radius: 1rem;">
-          <div class="card-body p-2 p-md-4 pt-5 text-center">
-            <h1 class="fw-bold mt-2 mb-3 text-cursive">Chat Up</h1>
+    <div class="row">
+      <!-- Users box-->
+      <div class="col-5 px-0 d-none d-sm-block">
+        <div class="bg-white">
 
+          <div class="bg-gray px-4 py-2 bg-light">
+            <p class="h5 mb-0 py-1">Recent</p>
+          </div>
 
-
-            <ul class="pages">
-              <li class="chat page d-none">
-                <div class="list-group">
-                  <ul class="messages"></ul>
+          <div class="messages-box">
+            <div class="list-group rounded-0">
+              <a class="list-group-item list-group-item-action active text-white rounded-0">
+                <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user"
+                    width="50" class="rounded-circle">
+                  <div class="media-body ml-4">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                      <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">25 Dec</small>
+                    </div>
+                    <p class="font-italic mb-0 text-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                      do eiusmod tempor incididunt ut labore.</p>
+                  </div>
                 </div>
-                <div class="input-group">
-                  <input type="text" class="form-control inputMessage" placeholder="Type here..."
-                    aria-label="Recipient's username with two button addons">
-                  <!-- <input type="text" class="form-control inputMessage" placeholder="Recipient's username" aria-label="Recipient's username with two button addons"> -->
-                  <button class="btn btn-outline-secondary" type="button">Button</button>
-                  <button class="btn btn-outline-secondary" type="button">Button</button>
-                </div>
+              </a>
 
-              </li>
-              <li class="login page">
-                <div class="form">
-                  <h3 class="title">What's your nickname?</h3>
-                  <input class="usernameInput" type="text" maxlength="14" />
+              <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+                <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user"
+                    width="50" class="rounded-circle">
+                  <div class="media-body ml-4">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                      <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">14 Dec</small>
+                    </div>
+                    <p class="font-italic text-muted mb-0 text-small">Lorem ipsum dolor sit amet, consectetur.
+                      incididunt ut labore.</p>
+                  </div>
                 </div>
-              </li>
-            </ul>
+              </a>
 
-            <div class="row" data-masonry='{"percentPosition": true }'>
+              <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+                <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user"
+                    width="50" class="rounded-circle">
+                  <div class="media-body ml-4">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                      <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">9 Nov</small>
+                    </div>
+                    <p class="font-italic text-muted mb-0 text-small">consectetur adipisicing elit, sed do eiusmod
+                      tempor incididunt ut labore.</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+                <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user"
+                    width="50" class="rounded-circle">
+                  <div class="media-body ml-4">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                      <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">18 Oct</small>
+                    </div>
+                    <p class="font-italic text-muted mb-0 text-small">Lorem ipsum dolor sit amet, consectetur
+                      adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+                <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user"
+                    width="50" class="rounded-circle">
+                  <div class="media-body ml-4">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                      <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">17 Oct</small>
+                    </div>
+                    <p class="font-italic text-muted mb-0 text-small">consectetur adipisicing elit, sed do eiusmod
+                      tempor incididunt ut labore.</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+                <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user"
+                    width="50" class="rounded-circle">
+                  <div class="media-body ml-4">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                      <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">2 Sep</small>
+                    </div>
+                    <p class="font-italic text-muted mb-0 text-small">Quis nostrud exercitation ullamco laboris nisi ut
+                      aliquip ex ea commodo consequat.</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+                <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user"
+                    width="50" class="rounded-circle">
+                  <div class="media-body ml-4">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                      <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">30 Aug</small>
+                    </div>
+                    <p class="font-italic text-muted mb-0 text-small">Lorem ipsum dolor sit amet, consectetur
+                      adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                  </div>
+                </div>
+              </a>
+
+              <a href="#" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+                <div class="media"><img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user"
+                    width="50" class="rounded-circle">
+                  <div class="media-body ml-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">21 Aug</small>
+                    </div>
+                    <p class="font-italic text-muted mb-0 text-small">Lorem ipsum dolor sit amet, consectetur
+                      adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
+                  </div>
+                </div>
+              </a>
 
             </div>
-
-
           </div>
         </div>
+      </div>
+      <!-- Chat Box-->
+      <div class="col-12 col-sm-7 px-0">
+        <div class="px-4 py-5 chat-box messages d-flex flex-column"></div>
+
+        <!-- Typing area -->
+        <div class="input-group">
+          <input type="text" placeholder="Type a message" aria-describedby="button-addon2"
+            class="form-control rounded-0 border-0 py-4 bg-light inputMessage">
+          <div class="input-group-append">
+            <button id="button-addon2" type="button" class="btn btn-link">
+              <i class="fa fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 </section>
 
-<div class="row d-flex flex-column message-template d-none">
-  <div class="col-auto mb-1" [ngStyle]="{'max-width':'70%'}">
-    <div class="card bg-primary text-white p-3">
-      <figure class="mb-0">
-        <blockquote class="blockquote">
-          <p class="message-text"></p>
-        </blockquote>
-        <figcaption class="blockquote-footer mb-0 text-white message-name">
-          <span></span> <cite title="Source Title"></cite>
-        </figcaption>
-      </figure>
+<!-- Message Template -->
+<div class="media w-50 mb-3 message-template d-none">
+  <div class="media-body">
+    <div class="message-bubble rounded py-2 px-3 mb-2">
+      <p class="text-small mb-0 text-white message-text"></p>
+      <p class="small text-muted message-name"></p>
+      <p class="small text-muted">12:00 PM | Aug 13</p>
     </div>
   </div>
 </div>

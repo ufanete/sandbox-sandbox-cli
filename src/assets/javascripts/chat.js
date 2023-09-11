@@ -24,9 +24,6 @@ const chatapp = function (user, messages) {
     var $messages = $('.messages'); // Messages area
     var $inputMessage = $('.inputMessage'); // Input message input box
 
-    var $loginPage = $('.login.page'); // The login page
-    var $chatPage = $('.chat.page'); // The chatroom page
-
     // Prompt for setting a username
     var username;
     var userId = "";
@@ -54,9 +51,6 @@ const chatapp = function (user, messages) {
         // If the username is valid
         if (username) {
             userId = user._id;
-            $loginPage.fadeOut();
-            $chatPage.removeClass("d-none").fadeIn();
-            $loginPage.off('click');
             $currentInput = $inputMessage.focus();
 
             // Tell the server your username
@@ -88,7 +82,7 @@ const chatapp = function (user, messages) {
 
     // Log a message
     const log = (message, options) => {
-        var $el = $('<li>').addClass('log').text(message);
+        var $el = $('<div>').addClass('log').text(message);
         addMessageElement($el, options);
     }
 
@@ -109,7 +103,7 @@ const chatapp = function (user, messages) {
             var $messageBodyDiv = $('<span class="messageBody">')
                 .text(data.message);
 
-            $messageDiv = $('<li class="message"/>')
+            $messageDiv = $('<section/>')
                 .data('username', data.username)
                 .addClass('typing')
                 .addClass('log')
@@ -125,10 +119,10 @@ const chatapp = function (user, messages) {
                 .data('username', data.username)
                 .removeClass('d-none')
                 .addClass('log')
-                .addClass(isRecievedMessage ? 'align-items-start text-start' : 'align-items-end text-end');
+                .addClass(isRecievedMessage ? 'align-self-start text-start' : 'align-self-end text-end');
             // set the message bubble color
-            $messageDiv.find('.card')
-                .addClass(isRecievedMessage ? 'bg-dark text-white' : '');
+            $messageDiv.find('.message-bubble')
+                .addClass(isRecievedMessage ? 'bg-secondary text-muted' : 'bg-primary');
             // Set the message
             $messageDiv.find('.message-text').text(data.message);
             // set the username
@@ -136,8 +130,6 @@ const chatapp = function (user, messages) {
                 .addClass(getUsernameColor(data.username));
             $messageDiv.attr('title', data.timestamp.toString());
         }
-
-
 
         addMessageElement($messageDiv, options);
     }
@@ -255,12 +247,6 @@ const chatapp = function (user, messages) {
     });
 
     // Click events
-
-    // Focus input when clicking anywhere on login page
-    $loginPage.click(() => {
-        $currentInput.focus();
-    });
-
     // Focus input when clicking on the message input's border
     $inputMessage.click(() => {
         $inputMessage.focus();
